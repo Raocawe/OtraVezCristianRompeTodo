@@ -285,4 +285,14 @@
         android:id="@+id/crono"
         android:layout_below="@+id/tableLayout" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="."
+        android:id="@+id/lblPuntaje"
+        android:layout_below="@+id/crono"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_marginStart="49dp" />
+
 </RelativeLayout>

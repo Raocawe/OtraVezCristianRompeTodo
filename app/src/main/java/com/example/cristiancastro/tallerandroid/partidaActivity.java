@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Chronometer;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +25,8 @@ public class partidaActivity extends AppCompatActivity {
     Context MiContext;
     Chronometer crono;
     Ahorcado ahorcado;
+    TextView Puntaje;
+    long elapseTime = 0;
 
     @TargetApi(Build.VERSION_CODES.N)
     @Override
@@ -32,8 +35,11 @@ public class partidaActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_partida);
         MiContext = getApplicationContext();
+        Puntaje = (TextView) findViewById(R.id.lblPuntaje);
+        Puntaje.setText("0");
 
         crono = (Chronometer)findViewById(R.id.crono);
+        crono.setBase(SystemClock.elapsedRealtime());
         crono.start();
 
         b = getIntent().getExtras();
@@ -50,7 +56,7 @@ public class partidaActivity extends AppCompatActivity {
 
         newP.setIdUP(u.getIdUP());
         newP.setFechaPartidaN(fecha);
-        ///newP.setPuntajePartida();
+        newP.setPuntajePartida(Integer.parseInt(Puntaje.getText().toString()));
 
         if(ahorcado.guardarPartida(newP,MiContext))
         {
@@ -59,4 +65,8 @@ public class partidaActivity extends AppCompatActivity {
         return false;
     }
 
+    public void Pausa()
+    {
+        crono.stop();
+    }
 }
