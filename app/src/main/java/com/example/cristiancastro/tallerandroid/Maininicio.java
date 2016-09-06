@@ -110,7 +110,6 @@ public class Maininicio extends AppCompatActivity {
         {
             Class<?> clase = Class.forName("com.example.cristiancastro.tallerandroid.partidaActivity");
             Intent i = new Intent(this, clase);
-            i.putExtra("Usuario", 2);
             startActivity(i);
         }
         catch(ClassNotFoundException e) {
