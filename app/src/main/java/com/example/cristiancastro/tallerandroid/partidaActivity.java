@@ -24,9 +24,9 @@ public class partidaActivity extends AppCompatActivity {
     UsuarioPublico u;
     Context MiContext;
     Chronometer crono;
+    long elapseTime = 0;
     Ahorcado ahorcado;
     TextView Puntaje;
-    long elapseTime = 0;
 
     @TargetApi(Build.VERSION_CODES.N)
     @Override
