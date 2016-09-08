@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import Dominio.Ahorcado;
+import Dominio.Palabra;
 import Dominio.Partida;
 import Dominio.UsuarioPublico;
 
@@ -29,6 +30,9 @@ public class partidaActivity extends AppCompatActivity {
     Ahorcado ahorcado;
     TextView Puntaje;
     Button Play,Pause;
+    String[] PalabraTraida;
+    String[] PalabraMostrar;
+    int ContadorErrores;
 
     @TargetApi(Build.VERSION_CODES.N)
     @Override
@@ -44,6 +48,7 @@ public class partidaActivity extends AppCompatActivity {
 
         crono = (Chronometer)findViewById(R.id.crono);
         crono.setBase(SystemClock.elapsedRealtime());
+        crono.start();
 
         Play.setEnabled(true);
         Pause.setEnabled(false);
@@ -88,4 +93,26 @@ public class partidaActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    public void Q(View V)
+    {
+       for (int i=0 ; i< PalabraTraida.length; i++)
+       {
+           if(PalabraTraida[i] == "q")
+           {
+               PalabraMostrar[i] = "q";
+               Button Q = (Button) findViewById(R.id.btnQ);
+               Q.setEnabled(false);
+           }
+           else
+           {
+               ContadorErrores++;
+
+           }
+       }
     }
+
+
+
+
+}
