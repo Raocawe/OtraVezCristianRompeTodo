@@ -69,4 +69,6 @@ public class partidaActivity extends AppCompatActivity {
     {
         crono.stop();
     }
+
+
 }
