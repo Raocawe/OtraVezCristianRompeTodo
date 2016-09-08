@@ -67,7 +67,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="56dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true">
 
         <TableRow
             android:layout_width="match_parent"
@@ -293,6 +294,8 @@
         android:id="@+id/lblPuntaje"
         android:layout_below="@+id/crono"
         android:layout_toEndOf="@+id/textView2"
-        android:layout_marginStart="49dp" />
+        android:layout_marginStart="49dp"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_marginLeft="49dp" />
 
 </RelativeLayout>
