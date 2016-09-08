@@ -346,4 +346,14 @@
         android:layout_toStartOf="@+id/btnPausa"
         android:onClick="Play"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="k"
+        android:id="@+id/lblPalabraMostrar"
+        android:layout_below="@+id/lblPuntaje"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="96dp" />
+
 </RelativeLayout>

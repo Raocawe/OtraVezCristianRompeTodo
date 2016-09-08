@@ -25,7 +25,7 @@ public class Maininicio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maininicio);
         MiContext = getApplicationContext();
-        Trabajando();
+       // Trabajando();
     }
 
     public void Registro(View v)

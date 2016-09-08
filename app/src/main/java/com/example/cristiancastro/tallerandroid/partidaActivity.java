@@ -26,13 +26,13 @@ public class partidaActivity extends AppCompatActivity {
     UsuarioPublico u;
     Context MiContext;
     Chronometer crono;
-    long elapseTime = 0;
     Ahorcado ahorcado;
-    TextView Puntaje;
-    Button Play,Pause;
-    String[] PalabraTraida;
-    String[] PalabraMostrar;
-    int ContadorErrores;
+    TextView Puntaje,mos;
+    String[] PalabraTraida ;
+    String[] PalabraMostrar ;
+
+    int Nivel = 1;
+    int ContadorErrores = 0;
 
     @TargetApi(Build.VERSION_CODES.N)
     @Override
@@ -44,24 +44,26 @@ public class partidaActivity extends AppCompatActivity {
         final Button Play =(Button)findViewById(R.id.btnPlay);
         final Button Pause =(Button)findViewById(R.id.btnPausa);
         Puntaje = (TextView) findViewById(R.id.lblPuntaje);
+        mos = (TextView)findViewById(R.id.lblPalabraMostrar);
         Puntaje.setText("0");
+
+        ActualizarPalabra();
 
         crono = (Chronometer)findViewById(R.id.crono);
         crono.setBase(SystemClock.elapsedRealtime());
         crono.start();
 
-        Play.setEnabled(true);
-        Pause.setEnabled(false);
+        Play.setEnabled(false);
+        Pause.setEnabled(true);
         b = getIntent().getExtras();
         ahorcado = new Ahorcado();
         u = new UsuarioPublico();
-       // u.setIdUP(b.getInt("Usuario"));
-       // u = ahorcado.SeleccionarEspecificaUsuarioPublicoPorId(u,MiContext);
+        u.setIdUP(b.getInt("Usuario"));
+        u = ahorcado.SeleccionarEspecificaUsuarioPublicoPorId(u,MiContext);
 
         Play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                crono.setBase(SystemClock.elapsedRealtime()+elapseTime);
                 crono.start();
                 Pause.setEnabled(true);
                 Play.setEnabled(false);
@@ -71,7 +73,6 @@ public class partidaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 crono.stop();
-                elapseTime = crono.getBase();
                 Play.setEnabled(true);
                 Pause.setEnabled(false);
             }
@@ -95,24 +96,38 @@ public class partidaActivity extends AppCompatActivity {
     }
 
     public void Q(View V)
-    {
+    {Button Q = (Button) findViewById(R.id.btnQ);
        for (int i=0 ; i< PalabraTraida.length; i++)
        {
            if(PalabraTraida[i] == "q")
            {
-               PalabraMostrar[i] = "q";
-               Button Q = (Button) findViewById(R.id.btnQ);
+               PalabraMostrar[i] = "Q";
                Q.setEnabled(false);
+               ActualizarPalabra();
            }
            else
            {
                ContadorErrores++;
-
+               Q.setEnabled(false);
            }
        }
     }
 
+    public void ActualizarPalabra()
+    {
+        String mostrar = new String();
+        mostrar = "";
+        for(int i=0; i<PalabraMostrar.length ; i++)
+        {
+            mostrar = mostrar.concat(PalabraMostrar[i]+" ");
+        }
+        mos.setText(mostrar);
+    }
 
+    public Palabra BuscarPalabra()
+    {
+        Palabra pal = new Palabra();
 
-
+        return pal;
+    }
 }

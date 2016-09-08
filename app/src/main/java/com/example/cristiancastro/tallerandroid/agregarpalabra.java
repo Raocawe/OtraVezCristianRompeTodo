@@ -27,7 +27,7 @@ public class agregarpalabra extends AppCompatActivity {
             TextView Descripcion = (TextView) findViewById(R.id.txtDefinicion);
 
             Palabra pal = new Palabra();
-            pal.setNombreP(Palabra.getText().toString());
+            pal.setNombreP(Palabra.getText().toString().toLowerCase());
             pal.setReferenciaP(Referencia.getText().toString());
             pal.setDescripcionP(Descripcion.getText().toString());
 
