@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import Dominio.Ahorcado;
+import Dominio.Palabra;
 import Dominio.Partida;
 import Dominio.UsuarioPublico;
 
@@ -27,6 +29,9 @@ public class partidaActivity extends AppCompatActivity {
     long elapseTime = 0;
     Ahorcado ahorcado;
     TextView Puntaje;
+    String[] PalabraTraida;
+    String[] PalabraMostrar;
+    int ContadorErrores;
 
     @TargetApi(Build.VERSION_CODES.N)
     @Override
@@ -47,6 +52,8 @@ public class partidaActivity extends AppCompatActivity {
         u = new UsuarioPublico();
        // u.setIdUP(b.getInt("Usuario"));
        // u = ahorcado.SeleccionarEspecificaUsuarioPublicoPorId(u,MiContext);
+
+
     }
 
     public boolean FinalizarPartida()
@@ -69,6 +76,27 @@ public class partidaActivity extends AppCompatActivity {
     {
         crono.stop();
     }
+
+
+    public void Q(View V)
+    {
+       for (int i=0 ; i< PalabraTraida.length; i++)
+       {
+           if(PalabraTraida[i] == "q")
+           {
+               PalabraMostrar[i] = "q";
+               Button Q = (Button) findViewById(R.id.btnQ);
+               Q.setEnabled(false);
+           }
+           else
+           {
+               ContadorErrores++;
+
+           }
+       }
+    }
+
+
 
 
 }
