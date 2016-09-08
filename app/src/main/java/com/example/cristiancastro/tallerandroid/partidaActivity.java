@@ -45,8 +45,8 @@ public class partidaActivity extends AppCompatActivity {
         b = getIntent().getExtras();
         ahorcado = new Ahorcado();
         u = new UsuarioPublico();
-        u.setIdUP(b.getInt("Usuario"));
-        u = ahorcado.SeleccionarEspecificaUsuarioPublicoPorId(u,MiContext);
+       // u.setIdUP(b.getInt("Usuario"));
+       // u = ahorcado.SeleccionarEspecificaUsuarioPublicoPorId(u,MiContext);
     }
 
     public boolean FinalizarPartida()
