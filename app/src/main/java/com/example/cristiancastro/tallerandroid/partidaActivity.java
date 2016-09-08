@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ public class partidaActivity extends AppCompatActivity {
     long elapseTime = 0;
     Ahorcado ahorcado;
     TextView Puntaje;
+    Button Play,Pause;
 
     @TargetApi(Build.VERSION_CODES.N)
     @Override
@@ -35,18 +37,40 @@ public class partidaActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_partida);
         MiContext = getApplicationContext();
+        final Button Play =(Button)findViewById(R.id.btnPlay);
+        final Button Pause =(Button)findViewById(R.id.btnPausa);
         Puntaje = (TextView) findViewById(R.id.lblPuntaje);
         Puntaje.setText("0");
 
         crono = (Chronometer)findViewById(R.id.crono);
         crono.setBase(SystemClock.elapsedRealtime());
-        crono.start();
 
+        Play.setEnabled(true);
+        Pause.setEnabled(false);
         b = getIntent().getExtras();
         ahorcado = new Ahorcado();
         u = new UsuarioPublico();
        // u.setIdUP(b.getInt("Usuario"));
        // u = ahorcado.SeleccionarEspecificaUsuarioPublicoPorId(u,MiContext);
+
+        Play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                crono.setBase(SystemClock.elapsedRealtime()+elapseTime);
+                crono.start();
+                Pause.setEnabled(true);
+                Play.setEnabled(false);
+            }
+        });
+        Pause.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                crono.stop();
+                elapseTime = crono.getBase();
+                Play.setEnabled(true);
+                Pause.setEnabled(false);
+            }
+        });
     }
 
     public boolean FinalizarPartida()
@@ -64,9 +88,4 @@ public class partidaActivity extends AppCompatActivity {
         }
         return false;
     }
-
-    public void Pausa()
-    {
-        crono.stop();
     }
-}
