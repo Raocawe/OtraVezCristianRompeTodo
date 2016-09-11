@@ -13,34 +13,34 @@ import Dominio.Palabra;
 public class modificarpalabra extends AppCompatActivity {
 
     Context MiContext;
-    TextView PalabraAModificar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modificarpalabra);
         MiContext = getApplicationContext();
-        PalabraAModificar = (TextView) findViewById(R.id.txtPalabra);
     }
 
     public void Enviar(View e)
     {
         if (ValidarCampos()) {
 
-            TextView Palabra = (TextView) findViewById(R.id.txtPalabra);
-            TextView Referencia = (TextView) findViewById(R.id.lblReferencia);
+            TextView Palabra = (TextView) findViewById(R.id.txtModificar);
+            TextView Referencia = (TextView) findViewById(R.id.txtReferencia);
             TextView Descripcion = (TextView) findViewById(R.id.txtDefinicion);
 
             Dominio.Palabra pal = new Palabra();
-            pal.setNombreP(Palabra.getText().toString());
+            String Nombree = Palabra.getText().toString().toLowerCase();
+            pal.setNombreP(Nombree);
             pal.setReferenciaP(Referencia.getText().toString());
             pal.setDescripcionP(Descripcion.getText().toString());
-            pal.setCantidadLetras(Palabra.getText().toString().length());
+            pal.setCantidadLetras(Nombree.toCharArray().length);
 
             Ahorcado ahorcado = new Ahorcado();
 
             if (ahorcado.ExistePalabra(pal,MiContext)) {
-                ahorcado.ModificarPalabra(pal,MiContext);
-                Toast.makeText(MiContext, "Palabra Modificada", Toast.LENGTH_SHORT).show();
+                if(ahorcado.ModificarPalabra(pal,Nombree,MiContext)) {
+                    Toast.makeText(MiContext, "Palabra Modificada", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(MiContext, "Palabra No Encontrada", Toast.LENGTH_SHORT).show();
             }
@@ -53,11 +53,14 @@ public class modificarpalabra extends AppCompatActivity {
 
     public boolean ValidarCampos()
     {
-        TextView Palabra = (TextView) findViewById(R.id.txtPalabra);
-        TextView Referencia = (TextView) findViewById(R.id.lblReferencia);
+        TextView Palabra = (TextView) findViewById(R.id.txtModificar);
+        TextView Referencia = (TextView) findViewById(R.id.txtReferencia);
         TextView Descripcion = (TextView) findViewById(R.id.txtDefinicion);
+        TextView Nombre = (TextView) findViewById(R.id.txtNombre);
 
-        return (!PalabraAModificar.getText().toString().isEmpty() && !Palabra.getText().toString().isEmpty() && !Referencia.getText().toString().isEmpty() &&
+        return (!Nombre.getText().toString().isEmpty() &&
+                !Palabra.getText().toString().isEmpty() &&
+                !Referencia.getText().toString().isEmpty() &&
                 !Descripcion.getText().toString().isEmpty());
     }
 }

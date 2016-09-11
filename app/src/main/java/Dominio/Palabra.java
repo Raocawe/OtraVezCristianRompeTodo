@@ -62,8 +62,8 @@ public class Palabra {
         return CantidadLetras;
     }
 
-    public void setCantidadLetras(int CantidadLetras) {
-        CantidadLetras = CantidadLetras;
+    public void setCantidadLetras(int pCantidadLetras) {
+        CantidadLetras = pCantidadLetras;
     }
 
     public boolean guardar(Palabra p,Context pContext)
@@ -76,10 +76,10 @@ public class Palabra {
         PerPalabra pp = new PerPalabra(pContext);
         return pp.SeleccionarPorNivel(pint);
     }
-    public boolean ModificarPalabra(Palabra p,Context pContext)
+    public boolean ModificarPalabra(Palabra p,String pPal,Context pContext)
     {
         PerPalabra pp = new PerPalabra(pContext);
-        return pp.ModificarPalabra(p);
+        return pp.ModificarPalabra(p,pPal);
     }
 
     public boolean existePalabra(Palabra p,Context pContext)

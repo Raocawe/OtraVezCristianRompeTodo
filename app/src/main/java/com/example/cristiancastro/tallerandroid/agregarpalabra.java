@@ -27,12 +27,15 @@ public class agregarpalabra extends AppCompatActivity {
             TextView Descripcion = (TextView) findViewById(R.id.txtDefinicion);
 
             Palabra pal = new Palabra();
-            pal.setNombreP(Palabra.getText().toString().toLowerCase());
+            String Nombree = Palabra.getText().toString().toLowerCase();
+            pal.setNombreP(Nombree);
             pal.setReferenciaP(Referencia.getText().toString());
             pal.setDescripcionP(Descripcion.getText().toString());
 
-            Ahorcado ahorcado = new Ahorcado();
+            String[] capturado = Nombree.split("");
+            pal.setCantidadLetras(capturado.length-1);
 
+            Ahorcado ahorcado = new Ahorcado();
             if (ahorcado.ExistePalabra(pal,MiContext)) {
                 Toast.makeText(MiContext, "Ya existe esa Palabra", Toast.LENGTH_SHORT).show();
             } else {
@@ -49,10 +52,11 @@ public class agregarpalabra extends AppCompatActivity {
     public boolean ValidarCampos()
     {
         TextView Palabra = (TextView) findViewById(R.id.txtPalabra);
-        TextView Referencia = (TextView) findViewById(R.id.lblReferencia);
+        TextView Referencia = (TextView) findViewById(R.id.txtReferencia);
         TextView Descripcion = (TextView) findViewById(R.id.txtDefinicion);
 
-        return (!Palabra.getText().toString().isEmpty() && !Referencia.getText().toString().isEmpty()
-        && !Descripcion.getText().toString().isEmpty());
+        return (!Palabra.getText().toString().isEmpty() &&
+                !Referencia.getText().toString().isEmpty() &&
+                !Descripcion.getText().toString().isEmpty());
     }
 }

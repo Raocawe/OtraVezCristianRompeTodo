@@ -20,7 +20,7 @@ public class PerPalabra extends SqlLite {
         boolean retorno = false;
         if(p != null) {
             this.ejecutarSentencia("INSERT INTO Palabra (NombreP,DescripcionP,CantidadLetras,ReferenciaP) " + "VALUES " +
-                    "('" + p.getNombreP() + "', '" + p.getDescripcionP() + "', " + p.getCantidadLetras() + ", '" + p.getReferenciaP() + "')");
+                    "('" + p.getNombreP() + "',' " + p.getDescripcionP() + "', " + p.getCantidadLetras() + ", '" + p.getReferenciaP() + "')");
         retorno = true;
         }
         return retorno;
@@ -31,7 +31,7 @@ public class PerPalabra extends SqlLite {
         Palabra palabra;
         ArrayList<Palabra> Palabras = new ArrayList<Palabra>();
         //Lo retornado se asigna al cursor que se encuantra en SQLite
-        this.seleccionar("SELECT * FROM Palabra where CantidadLetras = "+ pint);
+        this.seleccionar("SELECT * FROM Palabra where CantidadLetras = "+ pint+")");
         while(this.c.isAfterLast() == false)
         {
             palabra = new Palabra();
@@ -47,15 +47,15 @@ public class PerPalabra extends SqlLite {
         return Palabras;
     }
 
-    public boolean ModificarPalabra(Palabra p)
+    public boolean ModificarPalabra(Palabra p,String pPal)
     {
         boolean retorno = false;
         if (p != null)
         {
-            this.ejecutarSentencia("UPDATE Palabra SET NombreP = '" + p.getNombreP() +
-                    "', DescripcionP = '" + p.getDescripcionP() +
+            this.ejecutarSentencia("update Palabra SET NombreP = '" + p.getNombreP() +
+                    "', DescripcionP =' " + p.getDescripcionP() +
                     "', CantidadLetras = " + p.getCantidadLetras() +
-                    ", ReferenciaP = '" + p.getReferenciaP() + "' WHERE NombreP = '" + p.getNombreP() + "')");
+                    ", ReferenciaP = '" + p.getReferenciaP() + "' where NombreP = '" + pPal + "'");
             retorno = true;
         }
         return retorno;

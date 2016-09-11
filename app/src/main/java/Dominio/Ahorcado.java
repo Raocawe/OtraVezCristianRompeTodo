@@ -14,7 +14,7 @@ public class Ahorcado {
 
     public Ahorcado(){}
 
-    // USUARIO PUBLICO
+    //<editor-fold desc="USUARIO PUBLICO">
     public boolean existeUsuarioUsuarioPublico (UsuarioPublico pUp, Context pContext)
     {
         UsuarioPublico up = new UsuarioPublico();
@@ -40,15 +40,17 @@ public class Ahorcado {
         UsuarioPublico up = new UsuarioPublico();
         return up.SeleccionarEspecificaPorId(pup,pContext);
     }
+    //</editor-fold>
 
-    //USUARIO PRIVADO
+    //<editor-fold desc="USUARIO PRIVADO">
     public UsuarioPrivado SeleccionarEspecificaUsuarioPrivado(UsuarioPrivado pUp, Context pContext)
     {
         UsuarioPrivado up = new UsuarioPrivado();
         return up.SeleccionarEspecifica(pUp,pContext);
     }
+    //</editor-fold>
 
-    //PARTIDA
+    //<editor-fold desc="PARTIDA">
     public boolean guardarPartida(Partida p, Context pContext)
     {
         Partida par = new Partida();
@@ -74,8 +76,9 @@ public class Ahorcado {
         Partida par = new Partida();
         return par.TopCincoMejoresCelular(pU,pContext);
     }
+    //</editor-fold>
 
-    //PALABRA
+    //<editor-fold desc="PALABRA">
     public boolean guardarPalabra(Palabra p, Context pContext)
     {
         Palabra pp = new Palabra();
@@ -88,10 +91,10 @@ public class Ahorcado {
         return pp.SeleccionarPorNivel(pint,pContext);
     }
 
-    public boolean ModificarPalabra(Palabra p, Context pContext)
+    public boolean ModificarPalabra(Palabra p,String pPal ,Context pContext)
     {
         Palabra pp = new Palabra();
-        return pp.ModificarPalabra(p,pContext);
+        return pp.ModificarPalabra(p,pPal,pContext);
     }
 
     public boolean ExistePalabra(Palabra p, Context pContext)
@@ -99,4 +102,17 @@ public class Ahorcado {
         Palabra pp = new Palabra();
         return pp.existePalabra(p,pContext);
     }
+
+    public int LevelDevuelveCantLetras (int pNivel)
+    {
+        Palabra pp = new Palabra();
+        return pp.LevelDevuelveCantLetras(pNivel);
+    }
+
+    public String LevelDevuelveReferencias (int pNivel)
+    {
+        Palabra pp = new Palabra();
+        return pp.LevelDevuelveReferencias(pNivel);
+    }
+    //</editor-fold>
 }
