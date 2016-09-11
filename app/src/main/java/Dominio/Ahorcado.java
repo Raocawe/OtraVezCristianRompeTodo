@@ -14,7 +14,7 @@ public class Ahorcado {
 
     public Ahorcado(){}
 
-    //<editor-fold desc="USUARIO PUBLICO">
+    //region USUARIO PUBLICO
     public boolean existeUsuarioUsuarioPublico (UsuarioPublico pUp, Context pContext)
     {
         UsuarioPublico up = new UsuarioPublico();
@@ -40,17 +40,17 @@ public class Ahorcado {
         UsuarioPublico up = new UsuarioPublico();
         return up.SeleccionarEspecificaPorId(pup,pContext);
     }
-    //</editor-fold>
+    //endregion
 
-    //<editor-fold desc="USUARIO PRIVADO">
+    //region USUARIO PRIVADO
     public UsuarioPrivado SeleccionarEspecificaUsuarioPrivado(UsuarioPrivado pUp, Context pContext)
     {
         UsuarioPrivado up = new UsuarioPrivado();
         return up.SeleccionarEspecifica(pUp,pContext);
     }
-    //</editor-fold>
+    //endregion
 
-    //<editor-fold desc="PARTIDA">
+    //region PARTIDA
     public boolean guardarPartida(Partida p, Context pContext)
     {
         Partida par = new Partida();
@@ -76,9 +76,9 @@ public class Ahorcado {
         Partida par = new Partida();
         return par.TopCincoMejoresCelular(pU,pContext);
     }
-    //</editor-fold>
+    //endregion
 
-    //<editor-fold desc="PALABRA">
+    //region PALABRA
     public boolean guardarPalabra(Palabra p, Context pContext)
     {
         Palabra pp = new Palabra();
@@ -114,5 +114,5 @@ public class Ahorcado {
         Palabra pp = new Palabra();
         return pp.LevelDevuelveReferencias(pNivel);
     }
-    //</editor-fold>
+    //endregion
 }

@@ -39,7 +39,7 @@ public class SqlLite extends SQLiteOpenHelper {//Extiende para poder gestionar l
     // indicada en el teléfonc.
     public void crearDataBase() throws IOException {
         boolean dbExist = comprobarBaseDatos();
-        if (dbExist == false) {
+        if (!dbExist) {
             this.getWritableDatabase();
             try {
                 copiarBaseDatos();

@@ -1,6 +1,7 @@
 package Persistencia;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,13 +29,12 @@ public class PerPalabra extends SqlLite {
 
     public ArrayList<Palabra> SeleccionarPorNivel(int pint)
     {
-        Palabra palabra;
-        ArrayList<Palabra> Palabras = new ArrayList<Palabra>();
+        ArrayList<Palabra> Palabras = new ArrayList<>();
         //Lo retornado se asigna al cursor que se encuantra en SQLite
-        this.seleccionar("SELECT * FROM Palabra where CantidadLetras = "+ pint+")");
-        while(this.c.isAfterLast() == false)
+        this.seleccionar("SELECT * FROM Palabra where CantidadLetras = "+ pint +" ");
+        while(!this.c.isAfterLast())
         {
-            palabra = new Palabra();
+            Palabra palabra = new Palabra();
             palabra.setIdP(c.getInt(4));
             palabra.setNombreP(c.getString(0));
             palabra.setDescripcionP(c.getString(1));
@@ -65,7 +65,7 @@ public class PerPalabra extends SqlLite {
     {
         boolean existe = false;
         //Lo retornado se asigna al cursor que se encuantra en SQLite
-        this.seleccionar("SELECT * FROM Palabra "+ "where NombreP = '"+ p.getNombreP() + "'");
+        this.seleccionar("SELECT * FROM Palabra where NombreP = '"+ p.getNombreP() + "'");
         while(this.c.isAfterLast() == false)
         {
             existe = true;
