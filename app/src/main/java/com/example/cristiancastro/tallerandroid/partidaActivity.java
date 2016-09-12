@@ -177,7 +177,10 @@ public class partidaActivity extends AppCompatActivity {
     {
         for(int i=0; i<BottonesUsados.toArray().length;i++)
         {
-            ////////////////////////////////////
+            String aux = BottonesUsados.get(i);
+            String frase = "R.id.btn"+aux;
+            ////////////////////////////////////Button auux = (Button) findViewById();
+
         }
     }
 
