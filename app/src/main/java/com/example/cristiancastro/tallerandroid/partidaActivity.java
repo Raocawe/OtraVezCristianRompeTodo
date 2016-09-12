@@ -32,7 +32,7 @@ public class partidaActivity extends AppCompatActivity {
     String[] PalabraTraida;
     String[] PalabraMostrar;
     String formato = "";
-    ArrayList<String> BottonesUsados = new ArrayList<>();
+    ArrayList<String> BottonesUsados;
 
     int Nivel = 0;
     int ContadorErrores;
@@ -54,7 +54,6 @@ public class partidaActivity extends AppCompatActivity {
         mos = (TextView) findViewById(R.id.lblPalabraMostrar);
         MostrarNivel = (TextView) findViewById(R.id.lblNivel);
         Puntaje.setText(Integer.toString(Puntos));
-        BottonesUsados.clear();
 
         IniciarLevel();
 
@@ -177,7 +176,7 @@ public class partidaActivity extends AppCompatActivity {
     {
         if(BottonesUsados != null)
         {
-            for (int i = 0; i < BottonesUsados.toArray().length; i++)
+            for (int i = 0; i < BottonesUsados.size(); i++)
             {
                 ActivarBotton(BottonesUsados.get(i));
             }
