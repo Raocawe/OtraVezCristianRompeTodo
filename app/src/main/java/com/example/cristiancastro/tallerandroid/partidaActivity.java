@@ -53,7 +53,6 @@ public class partidaActivity extends AppCompatActivity {
         Puntaje = (TextView) findViewById(R.id.lblPuntaje);
         mos = (TextView) findViewById(R.id.lblPalabraMostrar);
         MostrarNivel = (TextView) findViewById(R.id.lblNivel);
-
         Puntaje.setText(Integer.toString(Puntos));
 
         IniciarLevel();
@@ -130,7 +129,7 @@ public class partidaActivity extends AppCompatActivity {
         for(int i = 0; i < pS.length(); i++)
         {
             retorno[i] = String.valueOf(pS.charAt(i));
-        }
+    }
         return retorno;
     }
 
@@ -147,7 +146,6 @@ public class partidaActivity extends AppCompatActivity {
             pal = ListaPalabras.get(Elejido);
 
             if (pal != null) {
-
                 //region CargarPalabraAVariables
                 String Nombre2[] = TransformarStringaArray(pal.getNombreP());
                 PalabraTraida = Nombre2;
