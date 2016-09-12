@@ -54,6 +54,7 @@ public class partidaActivity extends AppCompatActivity {
         mos = (TextView) findViewById(R.id.lblPalabraMostrar);
         MostrarNivel = (TextView) findViewById(R.id.lblNivel);
         Puntaje.setText(Integer.toString(Puntos));
+        BottonesUsados.clear();
 
         IniciarLevel();
 
@@ -109,7 +110,7 @@ public class partidaActivity extends AppCompatActivity {
         BuscarPalabra();
         ActualizarPalabra();
         CambiarImagen(ContadorErrores);
-        //ReiniciarBotones();
+        ReiniciarBotones();
     }
 
     public void ActualizarPalabra() {
@@ -174,13 +175,13 @@ public class partidaActivity extends AppCompatActivity {
 
     public void ReiniciarBotones()
     {
-        if(BottonesUsados == null)
+        if(BottonesUsados != null)
         {
             for (int i = 0; i < BottonesUsados.toArray().length; i++)
             {
                 ActivarBotton(BottonesUsados.get(i));
-                BottonesUsados.remove(BottonesUsados.get(i));
             }
+            BottonesUsados.clear();
         }
     }
 

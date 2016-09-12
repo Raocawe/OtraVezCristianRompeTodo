@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.cristiancastro.tallerandroid.partidaActivity"
-    android:background="@android:drawable/ic_lock_power_off">
+    android:background="@android:drawable/ic_lock_idle_alarm">
 
     <TextView
         android:layout_width="wrap_content"
