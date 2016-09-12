@@ -32,7 +32,7 @@ public class partidaActivity extends AppCompatActivity {
     String[] PalabraTraida;
     String[] PalabraMostrar;
     String formato = "";
-    ArrayList<String> BottonesUsados;
+    ArrayList<String> BottonesUsados = new ArrayList<>();
 
     int Nivel = 0;
     int ContadorErrores;
@@ -109,6 +109,7 @@ public class partidaActivity extends AppCompatActivity {
         BuscarPalabra();
         ActualizarPalabra();
         CambiarImagen(ContadorErrores);
+        //ReiniciarBotones();
     }
 
     public void ActualizarPalabra() {
@@ -173,11 +174,124 @@ public class partidaActivity extends AppCompatActivity {
 
     public void ReiniciarBotones()
     {
-        for(int i=0; i<BottonesUsados.toArray().length;i++)
+        if(BottonesUsados == null)
         {
-            String aux = BottonesUsados.get(i);
-            String frase = "R.id.btn"+aux;
-            ////////////////////////////////////Button auux = (Button) findViewById();
+            for (int i = 0; i < BottonesUsados.toArray().length; i++)
+            {
+                ActivarBotton(BottonesUsados.get(i));
+                BottonesUsados.remove(BottonesUsados.get(i));
+            }
+        }
+    }
+
+    public void ActivarBotton(String pBtn)
+    {
+        switch(pBtn)
+        {
+            case "A":
+                Button A =(Button) findViewById(R.id.btnA);
+                A.setEnabled(true);
+                break;
+            case "B":
+                Button B =(Button) findViewById(R.id.btnB);
+                B.setEnabled(true);
+                break;
+            case "C":
+                Button C =(Button) findViewById(R.id.btnC);
+                C.setEnabled(true);
+                break;
+            case "D":
+                Button D =(Button) findViewById(R.id.btnD);
+                D.setEnabled(true);
+                break;
+            case "E":
+                Button E =(Button) findViewById(R.id.brnE);
+                E.setEnabled(true);
+                break;
+            case "F":
+                Button F =(Button) findViewById(R.id.btnF);
+                F.setEnabled(true);
+                break;
+            case "G":
+                Button G =(Button) findViewById(R.id.btnG);
+                G.setEnabled(true);
+                break;
+            case "H":
+                Button H =(Button) findViewById(R.id.btnH);
+                H.setEnabled(true);
+                break;
+            case "I":
+                Button I =(Button) findViewById(R.id.btnI);
+                I.setEnabled(true);
+                break;
+            case "J":
+                Button J =(Button) findViewById(R.id.btnJ);
+                J.setEnabled(true);
+                break;
+            case "K":
+                Button K =(Button) findViewById(R.id.btnK);
+                K.setEnabled(true);
+                break;
+            case "L":
+                Button L =(Button) findViewById(R.id.btnL);
+                L.setEnabled(true);
+                break;
+            case "M":
+                Button M =(Button) findViewById(R.id.btnM);
+                M.setEnabled(true);
+                break;
+            case "N":
+                Button N =(Button) findViewById(R.id.btnN);
+                N.setEnabled(true);
+                break;
+            case "Ñ":
+                Button Ñ =(Button) findViewById(R.id.btnÑ);
+                Ñ.setEnabled(true);
+                break;
+            case "P":
+                Button P =(Button) findViewById(R.id.btnP);
+                P.setEnabled(true);
+                break;
+            case "Q":
+                Button Q =(Button) findViewById(R.id.btnQ);
+                Q.setEnabled(true);
+                break;
+            case "O":
+                Button O =(Button) findViewById(R.id.btnO);
+                O.setEnabled(true);
+                break;
+            case "R":
+                Button r =(Button) findViewById(R.id.btnR);
+                r.setEnabled(true);
+                break;
+            case "S":
+                Button S =(Button) findViewById(R.id.btnS);
+                S.setEnabled(true);
+                break;
+            case "T":
+                Button T =(Button) findViewById(R.id.btnT);
+                T.setEnabled(true);
+                break;
+            case "U":
+                Button U =(Button) findViewById(R.id.btnU);
+                U.setEnabled(true);
+                break;
+            case "X":
+                Button X =(Button) findViewById(R.id.btnX);
+                X.setEnabled(true);
+                break;
+            case "Y":
+                Button Y =(Button) findViewById(R.id.btnY);
+                Y.setEnabled(true);
+                break;
+            case "W":
+                Button W =(Button) findViewById(R.id.btnW);
+                W.setEnabled(true);
+                break;
+            case "Z":
+                Button Z =(Button) findViewById(R.id.btnZ);
+                Z.setEnabled(true);
+                break;
 
         }
     }
@@ -220,7 +334,7 @@ public class partidaActivity extends AppCompatActivity {
     }
 
     public void E(View V) {
-        Button E = (Button) findViewById(R.id.btnR);
+        Button E = (Button) findViewById(R.id.brnE);
         boolean encontrado = false;
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("e")) {
