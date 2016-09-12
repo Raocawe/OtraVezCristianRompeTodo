@@ -24,7 +24,11 @@
         <activity android:name=".mejorespuntajescelular" />
         <activity android:name=".loginadmin" />
         <activity android:name=".agregarpalabra" />
-        <activity android:name=".modificarpalabra"></activity>
+        <activity android:name=".modificarpalabra"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

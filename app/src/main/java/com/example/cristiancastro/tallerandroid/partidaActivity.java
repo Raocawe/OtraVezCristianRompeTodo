@@ -2,6 +2,7 @@ package com.example.cristiancastro.tallerandroid;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +13,10 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
-
 import Dominio.Ahorcado;
 import Dominio.Palabra;
 import Dominio.Partida;
@@ -29,15 +28,17 @@ public class partidaActivity extends AppCompatActivity {
     UsuarioPublico u;
     Context MiContext;
     Chronometer crono;
-    TextView Puntaje,mos;
-    String[] PalabraTraida ;
-    String[] PalabraMostrar ;
+    TextView Puntaje, mos, MostrarNivel;
+    String[] PalabraTraida;
+    String[] PalabraMostrar;
     String formato = "";
+    ArrayList<String> BottonesUsados;
 
-    int Nivel = 1;
-    int ContadorErrores = 0;
-    int CorrectasACompletar;
-    int Correctas = 0;
+    int Nivel = 0;
+    int ContadorErrores;
+    int ErroresACompletar = 7;
+    int CorrectasACompletar ;
+    int Correctas;
     int Puntos = 0;
 
     @TargetApi(Build.VERSION_CODES.N)
@@ -47,16 +48,17 @@ public class partidaActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_partida);
         MiContext = getApplicationContext();
-        final Button Play =(Button)findViewById(R.id.btnPlay);
-        final Button Pause =(Button)findViewById(R.id.btnPausa);
+        final Button Play = (Button) findViewById(R.id.btnPlay);
+        final Button Pause = (Button) findViewById(R.id.btnPausa);
         Puntaje = (TextView) findViewById(R.id.lblPuntaje);
-        mos = (TextView)findViewById(R.id.lblPalabraMostrar);
+        mos = (TextView) findViewById(R.id.lblPalabraMostrar);
+        MostrarNivel = (TextView) findViewById(R.id.lblNivel);
+
         Puntaje.setText(Integer.toString(Puntos));
 
-        BuscarPalabra();
-        ActualizarPalabra();
+        IniciarLevel();
 
-        crono = (Chronometer)findViewById(R.id.crono);
+        crono = (Chronometer) findViewById(R.id.crono);
         crono.setBase(SystemClock.elapsedRealtime());
         crono.start();
 
@@ -66,7 +68,7 @@ public class partidaActivity extends AppCompatActivity {
         Ahorcado ahorcado = new Ahorcado();
         u = new UsuarioPublico();
         u.setIdUP(b.getInt("Usuario"));
-        u = ahorcado.SeleccionarEspecificaUsuarioPublicoPorId(u,MiContext);
+        u = ahorcado.SeleccionarEspecificaUsuarioPublicoPorId(u, MiContext);
 
         Play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +79,7 @@ public class partidaActivity extends AppCompatActivity {
                 Play.setEnabled(false);
             }
         });
-        Pause.setOnClickListener(new View.OnClickListener(){
+        Pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 crono.stop();
@@ -88,629 +90,583 @@ public class partidaActivity extends AppCompatActivity {
         });
     }
 
-    public boolean FinalizarPartida()
-    {
+    public boolean FinalizarPartida() {
         Ahorcado aho = new Ahorcado();
-        java.util.Date fecha = new Date();
+        Date fecha = new Date();
         Partida newP = new Partida();
 
         newP.setIdUP(u.getIdUP());
         newP.setFechaPartidaN(fecha);
         newP.setPuntajePartida(Integer.parseInt(Puntaje.getText().toString()));
 
-        if(aho.guardarPartida(newP,MiContext))
-        {
-            return true;
-        }
-        return false;
+        return aho.guardarPartida(newP, MiContext);
     }
 
-    public void IniciarLevel()
-    {
-        Correctas = 0;
+    public void IniciarLevel() {
+        Correctas = -1;
         ContadorErrores = 0;
         Nivel++;
+        MostrarNivel.setText(Integer.toString(Nivel));
         BuscarPalabra();
         ActualizarPalabra();
         CambiarImagen(ContadorErrores);
     }
 
-    public void ActualizarPalabra()
-    {
+    public void ActualizarPalabra() {
         String mostrar = "";
-        for(int i=0; i<PalabraMostrar.length ; i++)
-        {
-            mostrar = mostrar.concat(PalabraMostrar[i]+" ");
+        for (int i = 0; i < PalabraMostrar.length; i++) {
+            mostrar = mostrar.concat(PalabraMostrar[i] + " ");
         }
         mos.setText(mostrar);
         Correctas++;
-        if (Correctas == CorrectasACompletar)
-        {
+        if (Correctas == CorrectasACompletar) {
             IniciarLevel();
         }
     }
 
-    public void BuscarPalabra()
+    public String[] TransformarStringaArray (String pS)
     {
+        String[] retorno = new String[pS.length()];
+        for(int i = 0; i < pS.length(); i++)
+        {
+            retorno[i] = String.valueOf(pS.charAt(i));
+        }
+        return retorno;
+    }
+
+    public void BuscarPalabra() {
         Ahorcado aho = new Ahorcado();
         Palabra pal = new Palabra();
-        CorrectasACompletar = aho.LevelDevuelveCantLetras(Nivel);
+        int numLet = aho.LevelDevuelveCantLetras(Nivel);
+        CorrectasACompletar = numLet;
         String Mostrar = aho.LevelDevuelveReferencias(Nivel);
-        ArrayList<Palabra> ListaPalabras = aho.SeleccionarPorNivelCantLetras(CorrectasACompletar,MiContext);
+        ArrayList<Palabra> ListaPalabras = aho.SeleccionarPorNivelCantLetras(numLet, MiContext);
         if (ListaPalabras != null) {
             Random rnd = new Random();
-            int Elejido = (int) (rnd.nextDouble() * ListaPalabras.toArray().length-1);
+            int Elejido = (int) (rnd.nextDouble() * ListaPalabras.toArray().length);
             pal = ListaPalabras.get(Elejido);
 
             if (pal != null) {
 
                 //region CargarPalabraAVariables
-                String[] Nombre = pal.getNombreP().split("");
-                String[] Nombre2 = new String[Nombre.length-1];
-                for(int d = 1 ; d<Nombre.length-1; d++)
-                {
-                    Nombre2[d] = Nombre[d];
-                }
+                String Nombre2[] = TransformarStringaArray(pal.getNombreP());
                 PalabraTraida = Nombre2;
-                String[] PalabraMstrar = new String[PalabraTraida.length];
+                String[] PalabraMstrar = new String[Nombre2.length];
 
-                for (int i = 0; i < PalabraTraida.length; i++) {
+                for (int i = 0; i < Nombre2.length; i++) {
                     PalabraMstrar[i] = "_ ";
                 }
                 PalabraMostrar = PalabraMstrar;
                 //endregion
             }
-        }
-        else
-        {
+        } else {
             Toast.makeText(MiContext, "No hay palabras asignadas a este Nivel", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void CambiarImagen(int pError)
-    {
+    public void CambiarImagen(int pError) {
+        if (pError != ErroresACompletar)
+        {
 
+        }
+        else
+        {FinalizarPartida();}
+    }
+
+    public void ReiniciarBotones()
+    {
+        for(int i=0; i<BottonesUsados.toArray().length;i++)
+        {
+            ////////////////////////////////////
+        }
     }
 
     //region TeclasControl
-    public void Q(View V)
-    {Button Q = (Button) findViewById(R.id.btnQ);
+    public void Q(View V) {
+        Button Q = (Button) findViewById(R.id.btnQ);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "q")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("q")) {
                 PalabraMostrar[i] = "q";
-                Q.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            Q.setEnabled(false);
         }
+        BottonesUsados.add("Q");
+        Q.setEnabled(false);
     }
 
-    public void W(View V)
-    {Button W = (Button) findViewById(R.id.btnW);
+    public void W(View V) {
+        Button W = (Button) findViewById(R.id.btnW);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "w")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("w")) {
                 PalabraMostrar[i] = "w";
-                W.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            W.setEnabled(false);
         }
+        BottonesUsados.add("W");
+        W.setEnabled(false);
     }
 
-    public void E(View V)
-    {Button E = (Button) findViewById(R.id.btnR);
+    public void E(View V) {
+        Button E = (Button) findViewById(R.id.btnR);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "e")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("e")) {
                 PalabraMostrar[i] = "e";
-                E.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            E.setEnabled(false);
         }
+        BottonesUsados.add("E");
+        E.setEnabled(false);
     }
 
-    public void R(View V)
-    {Button r = (Button) findViewById(R.id.btnR);
+    public void R(View V) {
+        Button r = (Button) findViewById(R.id.btnR);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "r")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("r")) {
                 PalabraMostrar[i] = "r";
-                r.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            r.setEnabled(false);
         }
+        BottonesUsados.add("R");
+        r.setEnabled(false);
     }
 
-    public void T(View V)
-    {Button T = (Button) findViewById(R.id.btnT);
+    public void T(View V) {
+        Button T = (Button) findViewById(R.id.btnT);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "t")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("t")) {
                 PalabraMostrar[i] = "t";
-                T.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            T.setEnabled(false);
         }
+        BottonesUsados.add("T");
+        T.setEnabled(false);
     }
 
-    public void Y(View V)
-    {Button Y = (Button) findViewById(R.id.btnY);
+    public void Y(View V) {
+        Button Y = (Button) findViewById(R.id.btnY);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "y")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("y")) {
                 PalabraMostrar[i] = "y";
-                Y.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            Y.setEnabled(false);
         }
+        BottonesUsados.add("Y");
+        Y.setEnabled(false);
     }
 
-    public void U(View V)
-    {Button U = (Button) findViewById(R.id.btnU);
+    public void U(View V) {
+        Button U = (Button) findViewById(R.id.btnU);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "u")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("u")) {
                 PalabraMostrar[i] = "u";
-                U.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            U.setEnabled(false);
         }
+        BottonesUsados.add("U");
+        U.setEnabled(false);
     }
 
-    public void I(View V)
-    {Button I = (Button) findViewById(R.id.btnI);
+    public void I(View V) {
+        Button I = (Button) findViewById(R.id.btnI);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "i")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("i")) {
                 PalabraMostrar[i] = "i";
-                I.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            I.setEnabled(false);
         }
+        BottonesUsados.add("I");
+        I.setEnabled(false);
     }
 
-    public void O(View V)
-    {Button O = (Button) findViewById(R.id.btnO);
+    public void O(View V) {
+        Button O = (Button) findViewById(R.id.btnO);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "o")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("o")) {
                 PalabraMostrar[i] = "o";
-                O.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            O.setEnabled(false);
         }
+        BottonesUsados.add("O");
+        O.setEnabled(false);
     }
 
-    public void P(View V)
-    {Button P = (Button) findViewById(R.id.btnP);
+    public void P(View V) {
+        Button P = (Button) findViewById(R.id.btnP);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "p")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("p")) {
                 PalabraMostrar[i] = "p";
-                P.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            P.setEnabled(false);
         }
+        BottonesUsados.add("P");
+        P.setEnabled(false);
     }
 
-    public void A(View V)
-    {Button A = (Button) findViewById(R.id.btnA);
+    public void A(View V) {
+        Button A = (Button) findViewById(R.id.btnA);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "a")
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("a"))
             {
                 PalabraMostrar[i] = "a";
-                A.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            A.setEnabled(false);
         }
+        BottonesUsados.add("A");
+        A.setEnabled(false);
     }
 
-    public void S(View V)
-    {Button S = (Button) findViewById(R.id.btnS);
+    public void S(View V) {
+        Button S = (Button) findViewById(R.id.btnS);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "s")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("s")) {
                 PalabraMostrar[i] = "s";
-                S.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            S.setEnabled(false);
         }
+        BottonesUsados.add("S");
+        S.setEnabled(false);
     }
 
-    public void D(View V)
-    {Button D = (Button) findViewById(R.id.btnD);
+    public void D(View V) {
+        Button D = (Button) findViewById(R.id.btnD);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "d")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("d")) {
                 PalabraMostrar[i] = "d";
-                D.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            D.setEnabled(false);
         }
+        BottonesUsados.add("D");
+        D.setEnabled(false);
     }
 
-    public void F(View V)
-    {Button F = (Button) findViewById(R.id.btnF);
+    public void F(View V) {
+        Button F = (Button) findViewById(R.id.btnF);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "f")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("f")) {
                 PalabraMostrar[i] = "f";
-                F.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            F.setEnabled(false);
         }
+        BottonesUsados.add("F");
+        F.setEnabled(false);
     }
 
-    public void G(View V)
-    {Button G = (Button) findViewById(R.id.btnG);
+    public void G(View V) {
+        Button G = (Button) findViewById(R.id.btnG);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "g")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("g")) {
                 PalabraMostrar[i] = "g";
-                G.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            G.setEnabled(false);
         }
+        BottonesUsados.add("G");
+        G.setEnabled(false);
     }
 
-    public void H(View V)
-    {Button H = (Button) findViewById(R.id.btnH);
+    public void H(View V) {
+        Button H = (Button) findViewById(R.id.btnH);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "h")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("h")) {
                 PalabraMostrar[i] = "h";
-                H.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            H.setEnabled(false);
         }
+        BottonesUsados.add("H");
+        H.setEnabled(false);
     }
 
-    public void J(View V)
-    {Button J = (Button) findViewById(R.id.btnJ);
+    public void J(View V) {
+        Button J = (Button) findViewById(R.id.btnJ);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "j")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("j")) {
                 PalabraMostrar[i] = "j";
-                J.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            J.setEnabled(false);
         }
+        BottonesUsados.add("J");
+        J.setEnabled(false);
     }
 
-    public void K(View V)
-    {Button K = (Button) findViewById(R.id.btnK);
+    public void K(View V) {
+        Button K = (Button) findViewById(R.id.btnK);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "k")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("k")) {
                 PalabraMostrar[i] = "k";
-                K.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            K.setEnabled(false);
         }
+        BottonesUsados.add("K");
+        K.setEnabled(false);
     }
 
-    public void L(View V)
-    {Button L = (Button) findViewById(R.id.btnL);
+    public void L(View V) {
+        Button L = (Button) findViewById(R.id.btnL);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "l")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("l")) {
                 PalabraMostrar[i] = "l";
-                L.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            L.setEnabled(false);
         }
+        BottonesUsados.add("L");
+        L.setEnabled(false);
     }
 
-    public void Z(View V)
-    {Button Z = (Button) findViewById(R.id.btnZ);
+    public void Z(View V) {
+        Button Z = (Button) findViewById(R.id.btnZ);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "z")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("z")) {
                 PalabraMostrar[i] = "z";
-                Z.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            Z.setEnabled(false);
         }
+        BottonesUsados.add("Z");
+        Z.setEnabled(false);
     }
 
-    public void Ñ(View V)
-    {Button Ñ = (Button) findViewById(R.id.btnÑ);
+    public void Ñ(View V) {
+        Button Ñ = (Button) findViewById(R.id.btnÑ);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "ñ")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("ñ")) {
                 PalabraMostrar[i] = "ñ";
-                Ñ.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            Ñ.setEnabled(false);
         }
+        BottonesUsados.add("Ñ");
+        Ñ.setEnabled(false);
     }
 
-    public void X(View V)
-    {Button X = (Button) findViewById(R.id.btnX);
+    public void X(View V) {
+        Button X = (Button) findViewById(R.id.btnX);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "x")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("x")) {
                 PalabraMostrar[i] = "x";
-                X.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            X.setEnabled(false);
         }
+        BottonesUsados.add("X");
+        X.setEnabled(false);
     }
 
-    public void C(View V)
-    {Button C = (Button) findViewById(R.id.btnC);
+    public void C(View V) {
+        Button C = (Button) findViewById(R.id.btnC);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "c")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("c")) {
                 PalabraMostrar[i] = "c";
-                C.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            C.setEnabled(false);
         }
+        BottonesUsados.add("C");
+        C.setEnabled(false);
     }
 
-    public void V(View V)
-    {Button v = (Button) findViewById(R.id.btnV);
+    public void V(View V) {
+        Button v = (Button) findViewById(R.id.btnV);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "v")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("v")) {
                 PalabraMostrar[i] = "v";
-                v.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            v.setEnabled(false);
         }
+        BottonesUsados.add("V");
+        v.setEnabled(false);
     }
 
-    public void B(View V)
-    {Button B = (Button) findViewById(R.id.btnB);
+    public void B(View V) {
+        Button B = (Button) findViewById(R.id.btnB);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "b")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("b")) {
                 PalabraMostrar[i] = "b";
-                B.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            B.setEnabled(false);
         }
+        BottonesUsados.add("B");
+        B.setEnabled(false);
     }
 
-    public void N(View V)
-    {Button N = (Button) findViewById(R.id.btnN);
+    public void N(View V) {
+        Button N = (Button) findViewById(R.id.btnN);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "n")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("n")) {
                 PalabraMostrar[i] = "n";
-                N.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            N.setEnabled(false);
         }
+        BottonesUsados.add("N");
+        N.setEnabled(false);
     }
 
-    public void M(View V)
-    {Button M = (Button) findViewById(R.id.btnM);
+    public void M(View V) {
+        Button M = (Button) findViewById(R.id.btnM);
         boolean encontrado = false;
-        for (int i=0 ; i< PalabraTraida.length; i++)
-        {
-            if(PalabraTraida[i] == "m")
-            {
+        for (int i = 0; i < PalabraTraida.length; i++) {
+            if (PalabraTraida[i].equals("m")) {
                 PalabraMostrar[i] = "m";
-                M.setEnabled(false);
                 ActualizarPalabra();
                 encontrado = true;
             }
         }
-        if(!encontrado) {
+        if (!encontrado) {
             ContadorErrores++;
             CambiarImagen(ContadorErrores);
-            M.setEnabled(false);
         }
+        BottonesUsados.add("M");
+        M.setEnabled(false);
     }
     //endregion
 }
