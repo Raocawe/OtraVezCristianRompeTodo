@@ -39,7 +39,7 @@ public class partidaActivity extends AppCompatActivity {
     int ErroresACompletar = 7;
     int CorrectasACompletar ;
     int Correctas;
-    int Puntos = 0;
+    int Puntos = -10;
 
     @TargetApi(Build.VERSION_CODES.N)
     @Override
@@ -102,6 +102,7 @@ public class partidaActivity extends AppCompatActivity {
     }
 
     public void IniciarLevel() {
+        Puntos += 10;
         Correctas = -1;
         ContadorErrores = 0;
         Nivel++;
@@ -119,6 +120,7 @@ public class partidaActivity extends AppCompatActivity {
         }
         mos.setText(mostrar);
         Correctas++;
+        Puntaje.setText(Integer.toString(Puntos));
         if (Correctas == CorrectasACompletar) {
             IniciarLevel();
         }
@@ -305,6 +307,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "q";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -323,6 +326,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "w";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -341,6 +345,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "e";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -349,7 +354,7 @@ public class partidaActivity extends AppCompatActivity {
         }
         BottonesUsados.add("E");
         E.setEnabled(false);
-    }
+    } /////////////////
 
     public void R(View V) {
         Button r = (Button) findViewById(R.id.btnR);
@@ -359,6 +364,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "r";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -377,6 +383,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "t";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -395,6 +402,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "y";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -413,6 +421,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "u";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -431,6 +440,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "i";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -449,6 +459,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "o";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -467,6 +478,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "p";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -486,6 +498,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "a";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -504,6 +517,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "s";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -522,6 +536,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "d";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -540,6 +555,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "f";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -558,6 +574,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "g";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -576,6 +593,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "h";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -594,6 +612,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "j";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -612,6 +631,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "k";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -630,6 +650,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "l";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -648,6 +669,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "z";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -666,6 +688,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "ñ";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -684,6 +707,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "x";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -702,6 +726,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "c";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -720,6 +745,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "v";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -738,6 +764,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "b";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -756,6 +783,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "n";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -774,6 +802,7 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar[i] = "m";
                 ActualizarPalabra();
                 encontrado = true;
+                Puntos += 5;
             }
         }
         if (!encontrado) {
