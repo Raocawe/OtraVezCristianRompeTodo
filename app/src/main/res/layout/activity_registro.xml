@@ -1,66 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent" android:layout_height="fill_parent" android:padding="20dip" android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="@drawable/fondo">
 
     <EditText android:id="@+id/txtUsuario"
         android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
+        android:layout_width="209dp"
         android:hint="Usuario"
         android:inputType="text"
-        android:layout_marginTop="-5dp" />
+        android:layout_marginTop="-5dp"
+        android:layout_marginLeft="80dp" />
 
     <EditText android:id="@+id/txtPass"
         android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
+        android:layout_width="209dp"
         android:hint="Password"
         android:inputType="text"
-        android:layout_marginTop="15dip"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="80dp" />
 
     <EditText
         android:id="@+id/txtApellido"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_width="209dp"
         android:hint="Apellido"
         android:inputType="text"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="80dp" />
 
     <EditText
         android:id="@+id/txtNombre"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_width="209dp"
         android:hint="Nombre"
         android:inputType="text"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="80dp" />
 
     <EditText
         android:id="@+id/txtEdad"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_width="209dp"
         android:hint="Edad"
         android:inputType="text"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="80dp" />
 
     <EditText android:id="@+id/txtEmail"
         android:layout_height="wrap_content"
-        android:layout_width="fill_parent" android:hint="Email" android:inputType="textEmailAddress"
-        android:layout_marginBottom="10dp" />
+        android:layout_width="209dp" android:hint="Email" android:inputType="textEmailAddress"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="80dp" />
 
     <EditText
         android:id="@+id/txtNacionalidad"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_width="209dp"
         android:hint="Nacionalidad"
         android:inputType="text"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="80dp" />
 
-    <Button android:id="@+id/btnRegister" android:layout_height="wrap_content"
-        android:layout_width="wrap_content" android:text="enviar"
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton10"
+        android:src="@drawable/registro"
+        android:background="#00ffffff"
         android:layout_gravity="center_horizontal"
-        android:paddingLeft="15dip" android:paddingRight="15dip"
-        android:onClick="Enviar"
-        />
+        android:onClick="Enviar" />
 
 
 </LinearLayout>

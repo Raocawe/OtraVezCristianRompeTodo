@@ -71,4 +71,5 @@ public class registroActivity extends AppCompatActivity {
                 && !Edad.getText().toString().isEmpty() && !Email.getText().toString().isEmpty()
                 && !Nacionalidad.getText().toString().isEmpty();
     }
+
 }

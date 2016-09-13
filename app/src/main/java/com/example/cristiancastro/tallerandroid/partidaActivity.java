@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.SimpleDateFormat;
@@ -48,8 +49,7 @@ public class partidaActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_partida);
         MiContext = getApplicationContext();
-        final Button Play = (Button) findViewById(R.id.btnPlay);
-        final Button Pause = (Button) findViewById(R.id.btnPausa);
+        final ImageButton Pause = (ImageButton) findViewById(R.id.btnPausa);
         Puntaje = (TextView) findViewById(R.id.lblPuntaje);
         mos = (TextView) findViewById(R.id.lblPalabraMostrar);
         MostrarNivel = (TextView) findViewById(R.id.lblNivel);
@@ -62,7 +62,7 @@ public class partidaActivity extends AppCompatActivity {
         crono.setBase(SystemClock.elapsedRealtime());
         crono.start();
 
-        Play.setEnabled(false);
+        //Play.setEnabled(false);
         Pause.setEnabled(true);
         b = getIntent().getExtras();
         Ahorcado ahorcado = new Ahorcado();
@@ -70,7 +70,7 @@ public class partidaActivity extends AppCompatActivity {
         u.setIdUP(b.getInt("Usuario"));
         u = ahorcado.SeleccionarEspecificaUsuarioPublicoPorId(u, MiContext);
 
-        Play.setOnClickListener(new View.OnClickListener() {
+        /*Play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 crono.start();
@@ -78,13 +78,14 @@ public class partidaActivity extends AppCompatActivity {
                 Pause.setEnabled(true);
                 Play.setEnabled(false);
             }
-        });
+        });*/
+
         Pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 crono.stop();
                 formato = crono.getText().toString();
-                Play.setEnabled(true);
+                //Play.setEnabled(true);
                 Pause.setEnabled(false);
             }
         });

@@ -1,6 +1,7 @@
 package com.example.cristiancastro.tallerandroid;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +12,25 @@ import Dominio.Ahorcado;
 import Dominio.Palabra;
 
 public class agregarpalabra extends AppCompatActivity {
+
     Context MiContext;
+    TextView TV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregarpalabra);
         MiContext = getApplicationContext();
+
+        TV = (TextView)findViewById(R.id.lblagp);                                                                                                  //medio de un ID
+
+        String font_path = "font/MixBrush.ttf";                                                                             //donde tiene que buscar ) de nuetra fuente
+
+        Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
+
+
+        TV.setTypeface(TF);
+
     }
 
     public void AgregarPalabra(View e)

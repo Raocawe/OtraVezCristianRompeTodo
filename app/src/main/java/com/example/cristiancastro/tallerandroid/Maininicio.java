@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInstaller;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,13 +20,23 @@ import Persistencia.SqlLite;
 public class Maininicio extends AppCompatActivity {
 
     Context MiContext;
+    TextView TV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maininicio);
         MiContext = getApplicationContext();
-       // Trabajando();
+
+
+        TV = (TextView)findViewById(R.id.lblInicio);                                                                                                  //medio de un ID
+
+        String font_path = "font/MixBrush.ttf";                                                                             //donde tiene que buscar ) de nuetra fuente
+
+        Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
+
+
+        TV.setTypeface(TF);
     }
 
     public void Registro(View v)

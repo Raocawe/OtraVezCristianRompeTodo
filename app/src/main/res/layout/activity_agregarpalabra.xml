@@ -7,47 +7,52 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.cristiancastro.tallerandroid.agregarpalabra">
+    tools:context="com.example.cristiancastro.tallerandroid.agregarpalabra"
+    android:background="@drawable/fondo">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Palabra"
+        android:textStyle="bold"
         android:id="@+id/lblPalabra"
-        android:layout_marginTop="169dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="38dp"
+        android:layout_below="@+id/lblagp"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Referencia"
+        android:textStyle="bold"
         android:id="@+id/lblReferencia"
-        android:layout_marginTop="59dp"
-        android:layout_below="@+id/lblPalabra"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/txtPalabra"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Definicion"
+        android:textStyle="bold"
         android:id="@+id/lblDefinicion"
-        android:layout_marginTop="70dp"
-        android:layout_below="@+id/lblReferencia"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/txtReferencia"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Agregar Palabra"
-        android:id="@+id/textView6"
-        android:layout_marginTop="50dp"
+        android:id="@+id/lblagp"
+        android:layout_marginTop="30dp"
         android:textSize="40dp"
         android:textColor="#04B486"
+        android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -56,33 +61,43 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtPalabra"
         android:layout_below="@+id/lblPalabra"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton"
+        android:layout_alignLeft="@+id/imageButton"
+        android:layout_alignStart="@+id/imageButton"
+        android:layout_marginTop="5dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtReferencia"
         android:layout_below="@+id/lblReferencia"
-        android:layout_alignEnd="@+id/txtPalabra"
-        android:layout_alignParentStart="true" />
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton"
+        android:layout_alignLeft="@+id/imageButton"
+        android:layout_alignStart="@+id/imageButton"
+        android:layout_marginTop="5dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtDefinicion"
         android:layout_below="@+id/lblDefinicion"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton"
+        android:layout_alignLeft="@+id/imageButton"
+        android:layout_alignStart="@+id/imageButton"
+        android:layout_marginTop="5dp" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Agregar"
-        android:id="@+id/btnEnviar"
-        android:layout_below="@+id/txtDefinicion"
-        android:layout_centerHorizontal="true"
-        android:onClick="AgregarPalabra"/>
+        android:id="@+id/imageButton"
+        android:src="@drawable/cp"
+        android:background="#00ffffff"
+        android:onClick="AgregarPalabra"
+        android:layout_marginBottom="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

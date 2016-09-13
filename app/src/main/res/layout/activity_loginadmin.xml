@@ -8,24 +8,41 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.cristiancastro.tallerandroid.loginadmin"
-    android:id="@+id/sss">
+    android:id="@+id/sss"
+    android:background="@drawable/fondo">
 
-    <Button
+
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Crear Palabras"
-        android:id="@+id/btnCrearPalabras"
-        android:layout_marginTop="85dp"
+        android:id="@+id/btnAgP"
+        android:src="@drawable/ag"
+        android:onClick="CrearPalabra"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:onClick="CrearPalabra" />
+        android:background="#00ffffff"
+        android:layout_marginTop="120dp" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Actualizar Palabras"
-        android:id="@+id/btnActualizarPalabras"
-        android:layout_centerVertical="true"
+        android:id="@+id/imageButton7"
+        android:layout_below="@+id/btnAgP"
         android:layout_centerHorizontal="true"
-        android:onClick="ModificarPalabra"/>
+        android:layout_marginTop="120dp"
+        android:src="@drawable/mp"
+        android:onClick="ModificarPalabra"
+        android:background="#00ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Bienvenido Admin"
+        android:textStyle="bold"
+        android:textColor="#04B486"
+        android:id="@+id/lblBienvenido"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"/>
 </RelativeLayout>

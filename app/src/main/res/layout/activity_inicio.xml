@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent" android:layout_height="fill_parent" android:padding="20dip" android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="@drawable/fondo">
 
     <TextView
         android:layout_width="wrap_content"
@@ -9,39 +10,48 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="."
         android:id="@+id/lblBienvenida"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:background="#00ffffff" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jugar"
-        android:id="@+id/btnJugar"
+        android:id="@+id/imageButton3"
         android:layout_gravity="center_horizontal"
-        android:onClick="Jugar"/>
+        android:src="@drawable/jugar"
+        android:onClick="Jugar"
+        android:background="#00ffffff"
+        android:layout_marginTop="50dp" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MPU"
-        android:id="@+id/btnmpu"
+        android:id="@+id/imageButton4"
         android:layout_gravity="center_horizontal"
-        android:onClick="MPU"/>
+        android:src="@drawable/mpu"
+        android:onClick="MPU"
+        android:background="#00ffffff"
+        android:layout_marginTop="50dp" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MPC"
-        android:id="@+id/btnmpc"
+        android:id="@+id/imageButton5"
         android:layout_gravity="center_horizontal"
-        android:onClick="MPC"/>
+        android:src="@drawable/mpc"
+        android:onClick="MPC"
+        android:background="#00ffffff"
+        android:layout_marginTop="50dp" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SALIR"
-        android:id="@+id/btnSalir"
+        android:id="@+id/imageButton6"
         android:layout_gravity="center_horizontal"
-        android:onClick="Salir"/>
+        android:src="@drawable/salir"
+        android:onClick="Salir"
+        android:background="#00ffffff"
+        android:layout_marginTop="50dp" />
 
 
 </LinearLayout>

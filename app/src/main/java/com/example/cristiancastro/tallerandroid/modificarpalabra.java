@@ -1,6 +1,7 @@
 package com.example.cristiancastro.tallerandroid;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,17 @@ public class modificarpalabra extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modificarpalabra);
         MiContext = getApplicationContext();
+
+        TextView TV;
+
+        TV = (TextView)findViewById(R.id.lblMp);
+
+        String font_path = "font/MixBrush.ttf";
+
+        Typeface TF = Typeface.createFromAsset(getAssets(),font_path);
+
+
+        TV.setTypeface(TF);
     }
 
     public void Enviar(View e)

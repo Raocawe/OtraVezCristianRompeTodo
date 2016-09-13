@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Mejores Puntajes del Celular"
-        android:id="@+id/textView4" />
+        android:id="@+id/lblMPC"
+        android:layout_marginLeft="40dp"
+        android:textSize="25dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#04B486"
+        android:textStyle="bold"
+        />
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="419dp"
-        android:id="@+id/lstVerMejoresPuntajesCelular" />
-
-    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView7"
-        android:layout_gravity="right" />
+        android:layout_height="309dp"
+        android:id="@+id/lstVerMejoresPuntajesCelular"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="0dp" />
+
 </LinearLayout>
