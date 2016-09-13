@@ -103,14 +103,14 @@ public class partidaActivity extends AppCompatActivity {
     }
 
     public void IniciarLevel() {
-        Puntos += 10;
         Correctas = -1;
         ContadorErrores = 0;
+        Puntos += 10-ContadorErrores;
         Nivel++;
         MostrarNivel.setText(Integer.toString(Nivel));
         BuscarPalabra();
         ActualizarPalabra();
-        CambiarImagen(ContadorErrores);
+        CambiarImagen();
         ReiniciarBotones();
     }
 
@@ -122,9 +122,6 @@ public class partidaActivity extends AppCompatActivity {
         mos.setText(mostrar);
         Correctas++;
         Puntaje.setText(Integer.toString(Puntos));
-        if (Correctas == CorrectasACompletar) {
-            IniciarLevel();
-        }
     }
 
     public String[] TransformarStringaArray (String pS)
@@ -144,7 +141,7 @@ public class partidaActivity extends AppCompatActivity {
         CorrectasACompletar = numLet;
         String Mostrar = aho.LevelDevuelveReferencias(Nivel);
         ArrayList<Palabra> ListaPalabras = aho.SeleccionarPorNivelCantLetras(numLet, MiContext);
-        if (ListaPalabras != null) {
+        if (!ListaPalabras.isEmpty()) {
             Random rnd = new Random();
             int Elejido = (int) (rnd.nextDouble() * ListaPalabras.toArray().length);
             pal = ListaPalabras.get(Elejido);
@@ -166,13 +163,8 @@ public class partidaActivity extends AppCompatActivity {
         }
     }
 
-    public void CambiarImagen(int pError) {
-        if (ErroresACompletar != pError)
-        {
+    public void CambiarImagen() {
 
-        }
-        else
-        {FinalizarPartida();}
     }
 
     public void ReiniciarBotones()
@@ -299,6 +291,18 @@ public class partidaActivity extends AppCompatActivity {
         }
     }
 
+    public void ControlarErroresYCorrectas()
+    {
+        if (ErroresACompletar == ContadorErrores)
+        {
+            FinalizarPartida();
+        }
+
+        if (Correctas == CorrectasACompletar) {
+            IniciarLevel();
+        }
+    }
+
     //region TeclasControl
     public void Q(View V) {
         Button Q = (Button) findViewById(R.id.btnQ);
@@ -313,10 +317,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("Q");
         Q.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void W(View V) {
@@ -332,10 +337,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("W");
         W.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void E(View V) {
@@ -351,10 +357,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("E");
         E.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void R(View V) {
@@ -370,10 +377,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("R");
         r.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void T(View V) {
@@ -389,10 +397,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("T");
         T.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void Y(View V) {
@@ -408,10 +417,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("Y");
         Y.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void U(View V) {
@@ -427,10 +437,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("U");
         U.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void I(View V) {
@@ -446,10 +457,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("I");
         I.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void O(View V) {
@@ -465,10 +477,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("O");
         O.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void P(View V) {
@@ -484,10 +497,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("P");
         P.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void A(View V) {
@@ -504,10 +518,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("A");
         A.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void S(View V) {
@@ -523,10 +538,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("S");
         S.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void D(View V) {
@@ -542,10 +558,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("D");
         D.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void F(View V) {
@@ -561,10 +578,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("F");
         F.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void G(View V) {
@@ -580,10 +598,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("G");
         G.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void H(View V) {
@@ -599,10 +618,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("H");
         H.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void J(View V) {
@@ -618,10 +638,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("J");
         J.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void K(View V) {
@@ -637,10 +658,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("K");
         K.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void L(View V) {
@@ -656,10 +678,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("L");
         L.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void Z(View V) {
@@ -675,10 +698,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("Z");
         Z.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void Ñ(View V) {
@@ -694,10 +718,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("Ñ");
         Ñ.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void X(View V) {
@@ -713,10 +738,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("X");
         X.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void C(View V) {
@@ -732,10 +758,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("C");
         C.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void V(View V) {
@@ -751,10 +778,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("V");
         v.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void B(View V) {
@@ -770,10 +798,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("B");
         B.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void N(View V) {
@@ -789,10 +818,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("N");
         N.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
 
     public void M(View V) {
@@ -808,10 +838,11 @@ public class partidaActivity extends AppCompatActivity {
         }
         if (!encontrado) {
             ContadorErrores++;
-            CambiarImagen(ContadorErrores);
+            CambiarImagen();
         }
         BottonesUsados.add("M");
         M.setEnabled(false);
+        ControlarErroresYCorrectas();
     }
     //endregion
 }
