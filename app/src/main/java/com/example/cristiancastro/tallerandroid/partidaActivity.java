@@ -54,6 +54,7 @@ public class partidaActivity extends AppCompatActivity {
         mos = (TextView) findViewById(R.id.lblPalabraMostrar);
         MostrarNivel = (TextView) findViewById(R.id.lblNivel);
         Puntaje.setText(Integer.toString(Puntos));
+        BottonesUsados = new ArrayList<String>();
 
         IniciarLevel();
 
@@ -166,7 +167,7 @@ public class partidaActivity extends AppCompatActivity {
     }
 
     public void CambiarImagen(int pError) {
-        if (pError != ErroresACompletar)
+        if (ErroresACompletar != pError)
         {
 
         }
@@ -176,7 +177,7 @@ public class partidaActivity extends AppCompatActivity {
 
     public void ReiniciarBotones()
     {
-        if(BottonesUsados != null)
+        if(!BottonesUsados.isEmpty())
         {
             for (int i = 0; i < BottonesUsados.size(); i++)
             {
@@ -305,9 +306,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("q")) {
                 PalabraMostrar[i] = "q";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -324,9 +325,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("w")) {
                 PalabraMostrar[i] = "w";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -343,9 +344,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("e")) {
                 PalabraMostrar[i] = "e";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -354,7 +355,7 @@ public class partidaActivity extends AppCompatActivity {
         }
         BottonesUsados.add("E");
         E.setEnabled(false);
-    } /////////////////
+    }
 
     public void R(View V) {
         Button r = (Button) findViewById(R.id.btnR);
@@ -362,9 +363,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("r")) {
                 PalabraMostrar[i] = "r";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -381,9 +382,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("t")) {
                 PalabraMostrar[i] = "t";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -400,9 +401,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("y")) {
                 PalabraMostrar[i] = "y";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -419,9 +420,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("u")) {
                 PalabraMostrar[i] = "u";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -438,9 +439,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("i")) {
                 PalabraMostrar[i] = "i";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -457,9 +458,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("o")) {
                 PalabraMostrar[i] = "o";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -476,9 +477,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("p")) {
                 PalabraMostrar[i] = "p";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -496,9 +497,9 @@ public class partidaActivity extends AppCompatActivity {
             if (PalabraTraida[i].equals("a"))
             {
                 PalabraMostrar[i] = "a";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -515,9 +516,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("s")) {
                 PalabraMostrar[i] = "s";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -534,9 +535,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("d")) {
                 PalabraMostrar[i] = "d";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -553,9 +554,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("f")) {
                 PalabraMostrar[i] = "f";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -572,9 +573,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("g")) {
                 PalabraMostrar[i] = "g";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -591,9 +592,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("h")) {
                 PalabraMostrar[i] = "h";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -610,9 +611,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("j")) {
                 PalabraMostrar[i] = "j";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -629,9 +630,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("k")) {
                 PalabraMostrar[i] = "k";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -648,9 +649,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("l")) {
                 PalabraMostrar[i] = "l";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -667,9 +668,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("z")) {
                 PalabraMostrar[i] = "z";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -686,9 +687,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("ñ")) {
                 PalabraMostrar[i] = "ñ";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -705,9 +706,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("x")) {
                 PalabraMostrar[i] = "x";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -724,9 +725,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("c")) {
                 PalabraMostrar[i] = "c";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -743,9 +744,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("v")) {
                 PalabraMostrar[i] = "v";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -762,9 +763,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("b")) {
                 PalabraMostrar[i] = "b";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -781,9 +782,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("n")) {
                 PalabraMostrar[i] = "n";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
@@ -800,9 +801,9 @@ public class partidaActivity extends AppCompatActivity {
         for (int i = 0; i < PalabraTraida.length; i++) {
             if (PalabraTraida[i].equals("m")) {
                 PalabraMostrar[i] = "m";
+                Puntos += 5;
                 ActualizarPalabra();
                 encontrado = true;
-                Puntos += 5;
             }
         }
         if (!encontrado) {
