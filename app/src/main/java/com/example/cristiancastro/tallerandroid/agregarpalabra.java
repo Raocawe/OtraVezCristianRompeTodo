@@ -55,6 +55,7 @@ public class agregarpalabra extends AppCompatActivity {
             } else {
                 ahorcado.guardarPalabra(pal,MiContext);
                 Toast.makeText(MiContext, "Palabra Agregada", Toast.LENGTH_SHORT).show();
+                Limpiar();
             }
         }
         else
@@ -72,5 +73,16 @@ public class agregarpalabra extends AppCompatActivity {
         return (!Palabra.getText().toString().isEmpty() &&
                 !Referencia.getText().toString().isEmpty() &&
                 !Descripcion.getText().toString().isEmpty());
+    }
+
+    public void Limpiar()
+    {
+        TextView Palabra = (TextView) findViewById(R.id.txtPalabra);
+        TextView Referencia = (TextView) findViewById(R.id.txtReferencia);
+        TextView Descripcion = (TextView) findViewById(R.id.txtDefinicion);
+
+        Palabra.setText(" ");
+        Referencia.setText(" ");
+        Descripcion.setText(" ");
     }
 }
