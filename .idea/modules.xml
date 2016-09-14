@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BestCristianRompeTodoasd.iml" filepath="$PROJECT_DIR$/BestCristianRompeTodoasd.iml" />
-      <module fileurl="file://$PROJECT_DIR$/OtraVezCristianRompeTodo.iml" filepath="$PROJECT_DIR$/OtraVezCristianRompeTodo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

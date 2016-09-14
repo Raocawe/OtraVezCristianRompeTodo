@@ -45,7 +45,7 @@ public class mejorespuntajescelular extends AppCompatActivity {
         list.setAdapter(adaptador);
 
 
-        TV = (TextView)findViewById(R.id.lblInicio);
+        TV = (TextView)findViewById(R.id.lblMPC);
 
         String font_path = "font/MixBrush.ttf";
 
