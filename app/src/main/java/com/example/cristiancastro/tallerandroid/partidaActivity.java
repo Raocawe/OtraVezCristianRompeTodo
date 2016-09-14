@@ -39,6 +39,8 @@ public class partidaActivity extends AppCompatActivity {
     String[] PalabraMostrar;
     String formato = "";
     ArrayList<String> BottonesUsados;
+    String Pista;
+    Palabra PalabraTraidaString;
 
     int Nivel = 0;
     int ContadorErrores;
@@ -160,12 +162,13 @@ public class partidaActivity extends AppCompatActivity {
         Palabra pal = new Palabra();
         int numLet = aho.LevelDevuelveCantLetras(Nivel);
         CorrectasACompletar = numLet;
-        String Mostrar = aho.LevelDevuelveReferencias(Nivel);
+        Pista = aho.LevelDevuelveReferencias(Nivel);
         ArrayList<Palabra> ListaPalabras = aho.SeleccionarPorNivelCantLetras(numLet, MiContext);
         if (!ListaPalabras.isEmpty()) {
             Random rnd = new Random();
             int Elejido = (int) (rnd.nextDouble() * ListaPalabras.toArray().length);
             pal = ListaPalabras.get(Elejido);
+            PalabraTraidaString = pal;
 
             if (pal != null) {
                 //region CargarPalabraAVariables
@@ -179,7 +182,9 @@ public class partidaActivity extends AppCompatActivity {
                 PalabraMostrar = PalabraMstrar;
                 //endregion
             }
-        } else {
+        }
+        else
+        {
             Toast.makeText(MiContext, "No hay palabras asignadas a este Nivel", Toast.LENGTH_SHORT).show();
         }
     }
@@ -373,6 +378,21 @@ public class partidaActivity extends AppCompatActivity {
         });
         AlertD.create().show();
     }
+
+    public void AlertaPista(String PISTA)
+    {
+        AlertDialog.Builder AlertD = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_Dialog_Translucent));
+        AlertD.setMessage("Pista: "+ PISTA);
+        AlertD.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertD.create().show();
+    }
+
+
 
     //region TeclasControl
     public void Q(View V) {
@@ -943,4 +963,26 @@ public class partidaActivity extends AppCompatActivity {
         ControlarErroresYCorrectas();
     }
     //endregion
+
+    public void Pista(View V) {
+
+          switch(Pista)
+        {
+            case "Palabra":
+
+                AlertaPista(PalabraTraidaString.getReferenciaP());
+                break;
+
+            case "Ninguna":
+                AlertaPista("No hay Pista para esta palabra");
+                break;
+
+            case "Referencia":
+                AlertaPista(PalabraTraidaString.getDescripcionP());
+                break;
+
+        }
+
+    }
 }
+
