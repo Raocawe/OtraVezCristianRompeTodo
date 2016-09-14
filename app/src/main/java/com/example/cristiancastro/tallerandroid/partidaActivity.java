@@ -2,11 +2,13 @@ package com.example.cristiancastro.tallerandroid;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.net.Uri;
+import android.content.DialogInterface;
 import android.os.Build;
-import android.os.SystemClock;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -15,10 +17,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+
 import Dominio.Ahorcado;
 import Dominio.Palabra;
 import Dominio.Partida;
@@ -348,6 +351,27 @@ public class partidaActivity extends AppCompatActivity {
         if (Correctas == CorrectasACompletar) {
             IniciarLevel();
         }
+    }
+
+   @Override
+    public void onBackPressed()
+    {
+        AlertDialog.Builder AlertD = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_Dialog_Translucent));
+        AlertD.setMessage("Esta partida se dara como finalizada, Salir?");
+        AlertD.setTitle("! ALERTA !");
+        AlertD.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                FinalizarPartida();
+            }
+        });
+        AlertD.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertD.create().show();
     }
 
     //region TeclasControl
