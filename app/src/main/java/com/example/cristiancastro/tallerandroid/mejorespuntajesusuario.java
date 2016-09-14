@@ -51,7 +51,7 @@ public class mejorespuntajesusuario extends AppCompatActivity {
         adaptador = new ArrayAdapter<Partida>(Micontext,android.R.layout.simple_spinner_item,listaDePartidas);
         list.setAdapter(adaptador);
 
-        TV = (TextView)findViewById(R.id.lblInicio);                                                                                                  //medio de un ID
+        TV = (TextView)findViewById(R.id.lblMPU);                                                                                                  //medio de un ID
 
         String font_path = "font/MixBrush.ttf";                                                                             //donde tiene que buscar ) de nuetra fuente
 
