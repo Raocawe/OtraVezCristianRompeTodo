@@ -70,13 +70,28 @@ public class partidaActivity extends AppCompatActivity {
         u.setIdUP(b.getInt("Usuario"));
         u = ahorcado.SeleccionarEspecificaUsuarioPublicoPorId(u, MiContext);
 
+        u = ahorcado.SeleccionarEspecificaUsuarioPublicoPorId(u,MiContext);
+        TextView Titulo = (TextView)findViewById(R.id.txtUJ);
+        Titulo.setText("Oye "+ u.getUsuarioU() +" Quieres una Pista? Toca en la lamparita");
         /*Play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 crono.start();
                 crono.setText(formato);
+
+                Titulo.setText("Bienvenido Usuario "+ u.getUsuarioU());
+
+                 b = getIntent().getExtras();
                 Pause.setEnabled(true);
                 Play.setEnabled(false);
+
+
+
+        TextView Titulo = (TextView)findViewById(R.id.lblBienvenida);
+        Titulo.setText("Bienvenido Usuario "+ u.getUsuarioU());
+
+
+
             }
         });*/
 

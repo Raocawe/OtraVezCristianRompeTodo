@@ -1,6 +1,7 @@
 package com.example.cristiancastro.tallerandroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -46,6 +47,7 @@ public class registroActivity extends AppCompatActivity {
                 up.setContraseñaU(Contraseña.getText().toString());
                 up.setApellidoU(Apellido.getText().toString());
                 up.setEdadUP(Integer.parseInt(Edad.getText().toString()));
+                Limpiar();
 
                 ahorcado.guardarUsuarioPublico(up,Micontext);
                 Toast.makeText(Micontext, "Usuario Agregado", Toast.LENGTH_SHORT).show();
@@ -72,4 +74,26 @@ public class registroActivity extends AppCompatActivity {
                 && !Nacionalidad.getText().toString().isEmpty();
     }
 
+    public void Limpiar()
+    {
+        TextView Nombre = (TextView) findViewById(R.id.txtNombre);
+        TextView Contraseña = (TextView) findViewById(R.id.txtPass);
+        TextView Usuario = (TextView) findViewById(R.id.txtUsuario);
+        TextView Apellido = (TextView) findViewById(R.id.txtApellido);
+        TextView Edad = (TextView) findViewById(R.id.txtEdad);
+        TextView Email = (TextView) findViewById(R.id.txtEmail);
+        TextView Nacionalidad = (TextView) findViewById(R.id.txtNacionalidad);
+
+        Nombre.setText(" ");
+        Contraseña.setText(" ");
+        Usuario.setText(" ");
+        Apellido.setText(" ");
+        Edad.setText(" ");
+        Email.setText(" ");
+        Nacionalidad.setText(" ");
+
+    }
+
+
 }
+

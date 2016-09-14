@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Nivel"
-                android:textSize="30dp"
+                android:textSize="31dp"
                 android:textColor="#000000"
                 android:textStyle="bold"
                 android:id="@+id/lblNivel"
@@ -60,84 +60,96 @@
             android:layout_marginLeft="10dp">
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="Q"
                 android:id="@+id/btnQ"
                 android:layout_gravity="right"
-                android:onClick="Q" />
+                android:onClick="Q"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="W"
                 android:id="@+id/btnW"
                 android:layout_gravity="right"
-                android:onClick="W" />
+                android:onClick="W"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="E"
                 android:id="@+id/brnE"
                 android:layout_gravity="right"
-                android:onClick="E" />
+                android:onClick="E"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="R"
                 android:id="@+id/btnR"
                 android:layout_gravity="right"
-                android:onClick="R" />
+                android:onClick="R"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="T"
                 android:id="@+id/btnT"
                 android:layout_gravity="right"
-                android:onClick="T" />
+                android:onClick="T"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="Y"
                 android:id="@+id/btnY"
                 android:layout_gravity="right"
-                android:onClick="Y" />
+                android:onClick="Y"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="U"
                 android:id="@+id/btnU"
                 android:layout_gravity="right"
-                android:onClick="U" />
+                android:onClick="U"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="I"
                 android:id="@+id/btnI"
                 android:layout_gravity="right"
-                android:onClick="I" />
+                android:onClick="I"
+                android:textSize="10dp" />
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="O"
                 android:id="@+id/btnO"
                 android:layout_gravity="right"
-                android:onClick="O" />
+                android:onClick="O"
+                android:layout_column="8"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="P"
                 android:id="@+id/btnP"
                 android:layout_gravity="right"
-                android:onClick="P" />
+                android:onClick="P"
+                android:layout_column="10"
+                android:textSize="10dp"/>
         </TableRow>
 
         <TableRow
@@ -146,84 +158,86 @@
             android:layout_marginLeft="16dp" >
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="A"
                 android:id="@+id/btnA"
                 android:layout_gravity="right"
-                android:onClick="A" />
+                android:onClick="A"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="S"
                 android:id="@+id/btnS"
                 android:layout_gravity="right"
-                android:onClick="S" />
+                android:onClick="S"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="D"
                 android:id="@+id/btnD"
                 android:layout_gravity="right"
                 android:onClick="D" />
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="F"
                 android:id="@+id/btnF"
                 android:layout_gravity="right"
-                android:onClick="F" />
+                android:onClick="F"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="G"
                 android:id="@+id/btnG"
                 android:layout_gravity="right"
-                android:onClick="G" />
+                android:onClick="G"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="H"
                 android:id="@+id/btnH"
                 android:layout_gravity="right"
-                android:onClick="H" />
+                android:onClick="H"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="J"
                 android:id="@+id/btnJ"
                 android:layout_gravity="right"
-                android:onClick="J" />
+                android:onClick="J"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="K"
                 android:id="@+id/btnK"
                 android:layout_gravity="right"
-                android:onClick="K" />
+                android:onClick="K"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="L"
                 android:id="@+id/btnL"
                 android:layout_gravity="right"
-                android:onClick="L" />
+                android:onClick="L"
+                android:layout_column="8"
+                android:textSize="10dp"/>
 
-            <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:text="Ñ"
-                android:id="@+id/btnÑ"
-                android:layout_gravity="right"
-                android:onClick="Ñ" />
         </TableRow>
 
         <TableRow
@@ -232,60 +246,83 @@
             android:layout_marginLeft="40dp" >
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="Z"
                 android:id="@+id/btnZ"
                 android:layout_gravity="right"
-                android:onClick="Z" />
+                android:onClick="Z"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="X"
                 android:id="@+id/btnX"
                 android:layout_gravity="right"
-                android:onClick="X" />
+                android:onClick="X"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="C"
                 android:id="@+id/btnC"
                 android:layout_gravity="right"
-                android:onClick="C" />
+                android:onClick="C"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="V"
                 android:id="@+id/btnV"
                 android:layout_gravity="right"
-                android:onClick="V" />
+                android:onClick="V"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="B"
                 android:id="@+id/btnB"
                 android:layout_gravity="right"
-                android:onClick="B" />
+                android:onClick="B"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="N"
                 android:id="@+id/btnN"
                 android:layout_gravity="right"
-                android:onClick="N" />
+                android:onClick="N"
+                android:textSize="10dp"/>
 
             <Button
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="31dp"
+                android:layout_height="31dp"
                 android:text="M"
                 android:id="@+id/btnM"
                 android:layout_gravity="right"
-                android:onClick="M" />
+                android:onClick="M"
+                android:textSize="10dp"/>
+
+            <Button
+                android:layout_width="31dp"
+                android:layout_height="31dp"
+                android:text="Ñ"
+                android:id="@+id/btnÑ"
+                android:layout_gravity="right"
+                android:onClick="Ñ"
+                android:layout_column="7"
+                android:textSize="10dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         </TableRow>
 
@@ -295,7 +332,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/crono"
-        android:layout_below="@+id/textView2"
+        
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="32dp"
@@ -323,7 +360,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="k"
         android:id="@+id/lblPalabraMostrar"
-        android:textSize="30dp"
+        android:textSize="35dp"
         android:textColor="#000000"
         android:textStyle="bold"
         android:layout_below="@+id/imgerror"
@@ -358,5 +395,18 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="#00ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="."
+        android:id="@+id/txtUJ"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_alignBottom="@+id/imageButton9"
+        android:layout_toRightOf="@+id/crono"
+        android:layout_toEndOf="@+id/crono" />
 
 </RelativeLayout>
