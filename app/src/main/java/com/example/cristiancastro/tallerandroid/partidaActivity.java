@@ -81,6 +81,7 @@ public class partidaActivity extends AppCompatActivity {
         u = ahorcado.SeleccionarEspecificaUsuarioPublicoPorId(u,MiContext);
         TextView Titulo = (TextView)findViewById(R.id.txtUJ);
         Titulo.setText("Oye "+ u.getUsuarioU() +" Quieres una Pista? Toca en la lamparita");
+
         /*Play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,14 +93,6 @@ public class partidaActivity extends AppCompatActivity {
                  b = getIntent().getExtras();
                 Pause.setEnabled(true);
                 Play.setEnabled(false);
-
-
-
-        TextView Titulo = (TextView)findViewById(R.id.lblBienvenida);
-        Titulo.setText("Bienvenido Usuario "+ u.getUsuarioU());
-
-
-
             }
         });*/
 
@@ -108,8 +101,26 @@ public class partidaActivity extends AppCompatActivity {
             public void onClick(View view) {
                 crono.stop();
                 formato = crono.getText().toString();
-                //Play.setEnabled(true);
-                Pause.setEnabled(false);
+                //region Alert
+
+                AlertDialog.Builder AlertD = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_Dialog_Translucent));
+                AlertD.setMessage("En lo que va de la partida "+ formato+
+                        "\n LLevas "+Puntos+
+                        "\n Nivel "+Nivel+
+                        "\n"+
+                        "Continuar?");
+                AlertD.setTitle("! PAUSA !");
+                AlertD.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        crono.start();
+                        crono.setText(formato);
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertD.create().show();
+                //endregion
             }
         });
     }
@@ -136,6 +147,7 @@ public class partidaActivity extends AppCompatActivity {
         ActualizarPalabra();
         CambiarImagen();
         ReiniciarBotones();
+        Puntaje.setText(Integer.toString(Puntos));
     }
 
     public void ActualizarPalabra() {
@@ -347,7 +359,6 @@ public class partidaActivity extends AppCompatActivity {
     public void ControlarErroresYCorrectas() //Tambien Actualiza Puntajes
     {
         Puntaje.setText(Integer.toString(Puntos));
-
         if (ErroresACompletar == ContadorErrores)
         {
             FinalizarPartida();
@@ -391,8 +402,6 @@ public class partidaActivity extends AppCompatActivity {
         });
         AlertD.create().show();
     }
-
-
 
     //region TeclasControl
     public void Q(View V) {
