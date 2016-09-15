@@ -3,6 +3,7 @@ package com.example.cristiancastro.tallerandroid;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -101,26 +103,7 @@ public class partidaActivity extends AppCompatActivity {
             public void onClick(View view) {
                 crono.stop();
                 formato = crono.getText().toString();
-                //region Alert
-
-                AlertDialog.Builder AlertD = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_Dialog_Translucent));
-                AlertD.setMessage("En lo que va de la partida "+ formato+
-                        "\n LLevas "+Puntos+
-                        "\n Nivel "+Nivel+
-                        "\n"+
-                        "Continuar?");
-                AlertD.setTitle("! PAUSA !");
-                AlertD.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        crono.start();
-                        crono.setText(formato);
-                        dialogInterface.cancel();
-                    }
-                });
-                AlertD.create().show();
-                //endregion
+                AlertaPausa();
             }
         });
     }
@@ -379,6 +362,16 @@ public class partidaActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 FinalizarPartida();
+                try{
+                    Class<?> clase = Class.forName("com.example.cristiancastro.tallerandroid.inicio");
+                    Intent l = new Intent(MiContext, clase);
+                    l.putExtra("Usuario",u.getIdUP());
+                    startActivity(l);
+                }
+                catch (ClassNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
             }
         });
         AlertD.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -397,6 +390,27 @@ public class partidaActivity extends AppCompatActivity {
         AlertD.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertD.create().show();
+    }
+
+    public void AlertaPausa()
+    {
+        AlertDialog.Builder AlertD = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_Dialog_Translucent));
+        AlertD.setMessage("En lo que va de la partida "+ formato+
+                "\n LLevas "+Puntos+
+                " puntos\n Nivel "+Nivel+
+                "\n"+
+                "Continuar?");
+        AlertD.setTitle("! PAUSA !");
+        AlertD.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                crono.start();
+                crono.setText(formato);
                 dialogInterface.cancel();
             }
         });
