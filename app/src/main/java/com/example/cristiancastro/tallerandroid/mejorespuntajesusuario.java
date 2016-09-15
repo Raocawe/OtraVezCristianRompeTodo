@@ -26,7 +26,6 @@ import Dominio.UsuarioPublico;
 public class mejorespuntajesusuario extends AppCompatActivity {
 
     Context Micontext;
-    ArrayAdapter<Partida> adaptador;
     ArrayList<Partida> listaDePartidas;
     Bundle b;
     UsuarioPublico u;
@@ -50,15 +49,25 @@ public class mejorespuntajesusuario extends AppCompatActivity {
         u.setIdUP(b.getInt("Usuario"));
         u = aho.SeleccionarEspecificaUsuarioPublicoPorId(u, Micontext);
 
-        //CARGA LISTA A MOSTRAR
+        //region CARGA LISTA A MOSTRAR
         try {
             listaDePartidas = aho.TopCincoMejoresCelularPartidas(u, Micontext);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
+        ArrayList<String> aMostrar = new ArrayList<>();
+        Partida pP;
+        String sS;
+        for(int i=0; i<listaDePartidas.size();i++)
+        {
+            pP = listaDePartidas.get(i);
+            sS = "PUNTAJE: "+ pP.getPuntajePartida() + "    FECHA: "+ pP.getFechaPartidaN();
+            aMostrar.add(sS);
+        }
+        //endregion
 
-        adaptador = new ArrayAdapter<Partida>(Micontext, android.R.layout.simple_spinner_item, listaDePartidas);
+        ArrayAdapter<String>  adaptador = new ArrayAdapter<String>(Micontext, android.R.layout.simple_spinner_item, aMostrar);
         list.setAdapter(adaptador);
 
         TV = (TextView) findViewById(R.id.lblMPU);                                                                                                  //medio de un ID

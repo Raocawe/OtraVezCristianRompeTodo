@@ -18,7 +18,6 @@ import Dominio.UsuarioPublico;
 public class mejorespuntajescelular extends AppCompatActivity {
 
     Context MiContext;
-    ArrayAdapter<Partida> adaptador;
     ArrayList<Partida> listaDePartidas;
 
 
@@ -31,17 +30,27 @@ public class mejorespuntajescelular extends AppCompatActivity {
         MiContext = getApplicationContext();
         Ahorcado aho = new Ahorcado();
 
-
-
-        //CARGA LISTA A MOSTRAR
+        //region CARGA LISTA A MOSTRAR
         try {
             listaDePartidas = aho.TopCincoMejoresPartidas(MiContext);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
+
+        ArrayList<String> aMostrar = new ArrayList<>();
+        Partida pP;
+        String sS;
+        for(int i=0; i<listaDePartidas.size();i++)
+        {
+            pP = listaDePartidas.get(i);
+            sS = "PUNTAJE: "+ pP.getPuntajePartida() + "    FECHA: "+ pP.getFechaPartidaN();
+            aMostrar.add(sS);
+        }
+        //endregion
+
         ListView list = (ListView)findViewById(R.id.lstVerMejoresPuntajesCelular);
-        adaptador = new ArrayAdapter<Partida>(MiContext,android.R.layout.simple_spinner_item,listaDePartidas);
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(MiContext,android.R.layout.simple_spinner_item,aMostrar);
         list.setAdapter(adaptador);
 
 
