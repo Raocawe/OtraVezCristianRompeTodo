@@ -93,30 +93,33 @@ public class partidaActivity extends AppCompatActivity {
         crono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                if(!Reloj)
-               {
-                   long sec = ((SystemClock.elapsedRealtime()-crono.getBase())/1000%60);
-                   if(sec<10)
-                   {
-                       formato = "00:0"+sec;
-                   }
-                   else
-                   {formato = "00:"+sec;}
-                   crono.setText(formato);
-                   elapsedTime = SystemClock.elapsedRealtime();
-               }
-               else
-               {
-                   long sec = ((SystemClock.elapsedRealtime()-crono.getBase())/1000%60);
-                   if(sec<10)
-                   {
-                       formato = "00:0"+sec;
-                   }
-                   else
-                   {formato = "00:"+sec;}
-                   crono.setText(formato);
-                   elapsedTime += 1000;
-               }
+                if (((SystemClock.elapsedRealtime() - crono.getBase()) / 1000 % 60) != 59) {
+
+                    if (!Reloj) {
+                        long sec = ((SystemClock.elapsedRealtime() - crono.getBase()) / 1000 % 60);
+                        if (sec < 10) {
+                            formato = "00:0" + sec;
+                        } else {
+                            formato = "00:" + sec;
+                        }
+                        crono.setText(formato);
+                        elapsedTime = SystemClock.elapsedRealtime();
+                    } else {
+                        long sec = ((SystemClock.elapsedRealtime() - crono.getBase()) / 1000 % 60);
+                        if (sec < 10) {
+                            formato = "00:0" + sec;
+                        } else {
+                            formato = "00:" + sec;
+                        }
+                        crono.setText(formato);
+                        elapsedTime += 1000;
+                    }
+                }
+                else
+                {
+                    FinalizarPartida();
+                    AlertaTiempo();
+                }
             }
         });
     }
@@ -150,12 +153,12 @@ public class partidaActivity extends AppCompatActivity {
         ContadorErrores = 0;
         Puntos += 5;
         Nivel++;
-        MostrarNivel.setText(Integer.toString(Nivel));
+        MostrarNivel.setText("NIVEL: "+Integer.toString(Nivel));
         BuscarPalabra();
         ActualizarPalabra();
         CambiarImagen();
         ReiniciarBotones();
-        Puntaje.setText(Integer.toString(Puntos));
+        Puntaje.setText("Puntaje "+Integer.toString(Puntos));
         ReiniciarReloj();
     }
 
@@ -375,10 +378,20 @@ public class partidaActivity extends AppCompatActivity {
 
         if (Correctas == CorrectasACompletar) {
             IniciarLevel();
+            if(Nivel != 12)
+            {
+                AlertaSigLevel();
+            }
+            else
+            {
+                AlertaFinalDePartida();
+            }
         }
     }
 
-   @Override
+    //region Alertas
+
+    @Override
     public void onBackPressed()
     {
         AlertDialog.Builder AlertD = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_Dialog_Translucent));
@@ -456,6 +469,73 @@ public class partidaActivity extends AppCompatActivity {
         });
         AlertD.create().show();
     }
+
+    public void AlertaSigLevel()
+    {
+        AlertDialog.Builder AlertD = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_Dialog_Translucent));
+        AlertD.setMessage("Palabra encontrada "+ PalabraTraidaString.getNombreP()+"\n\nCONTINUA JUGANDO");
+        AlertD.setTitle("! Nivel "+ Integer.toString(Nivel-1) + " Superado!");
+        AlertD.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertD.create().show();
+    }
+
+    public void AlertaFinalDePartida()
+    {
+        AlertDialog.Builder AlertD = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_Dialog_Translucent));
+        AlertD.setMessage("As obtenido "+Puntos+" Puntos");
+        AlertD.setTitle("!!ENHORABUENA AHORCADO SUPERADO!!");
+        AlertD.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                FinalizarPartida();
+                try{
+                    Class<?> clase = Class.forName("com.example.cristiancastro.tallerandroid.inicio");
+                    Intent l = new Intent(MiContext, clase);
+                    l.putExtra("Usuario",u.getIdUP());
+                    startActivity(l);
+                }
+                catch (ClassNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+        AlertD.create().show();
+    }
+
+    public void AlertaTiempo()
+    {
+        AlertDialog.Builder AlertD = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_Dialog_Translucent));
+        AlertD.setMessage("Te has quedado sin tiempo \nPuntos obtenidos "+Puntos+"\nNivel "+Nivel);
+        AlertD.setTitle("!!PERDISTES POR TIEMPO!!");
+        AlertD.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                FinalizarPartida();
+                try{
+                    Class<?> clase = Class.forName("com.example.cristiancastro.tallerandroid.inicio");
+                    Intent l = new Intent(MiContext, clase);
+                    l.putExtra("Usuario",u.getIdUP());
+                    startActivity(l);
+                }
+                catch (ClassNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+        AlertD.create().show();
+    }
+
+    //endregion
 
     //region TeclasControl
     public void Q(View V) {
