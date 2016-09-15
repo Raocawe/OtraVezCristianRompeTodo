@@ -79,12 +79,14 @@ public class modificarpalabra extends AppCompatActivity {
 
     public void Limpiar()
     {
-        TextView Palabra = (TextView) findViewById(R.id.txtPalabra);
+        TextView Palabra = (TextView) findViewById(R.id.txtModificar);
         TextView Referencia = (TextView) findViewById(R.id.txtReferencia);
         TextView Descripcion = (TextView) findViewById(R.id.txtDefinicion);
+        TextView Nombre = (TextView) findViewById(R.id.txtNombre);
 
         Palabra.setText(" ");
         Referencia.setText(" ");
         Descripcion.setText(" ");
+        Nombre.setText(" ");
     }
 }
