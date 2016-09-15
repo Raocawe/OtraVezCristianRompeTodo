@@ -43,6 +43,8 @@ public class partidaActivity extends AppCompatActivity {
     ArrayList<String> BottonesUsados;
     String Pista;
     Palabra PalabraTraidaString;
+    long elapsedTime = 0;
+    boolean Reloj = false;
 
     int Nivel = 0;
     int ContadorErrores;
@@ -65,14 +67,9 @@ public class partidaActivity extends AppCompatActivity {
         Puntaje.setText(Integer.toString(Puntos));
         BottonesUsados = new ArrayList<String>();
         Errores =(ImageView) findViewById(R.id.imgerror);
+        crono = (Chronometer) findViewById(R.id.crono);
 
         IniciarLevel();
-
-        crono = (Chronometer) findViewById(R.id.crono);
-        crono.setBase(SystemClock.elapsedRealtime());
-        crono.start();
-
-        //Play.setEnabled(false);
         Pause.setEnabled(true);
         b = getIntent().getExtras();
         Ahorcado ahorcado = new Ahorcado();
@@ -82,30 +79,58 @@ public class partidaActivity extends AppCompatActivity {
 
         u = ahorcado.SeleccionarEspecificaUsuarioPublicoPorId(u,MiContext);
         TextView Titulo = (TextView)findViewById(R.id.txtUJ);
-        Titulo.setText("Oye "+ u.getUsuarioU() +" Quieres una Pista? Toca en la lamparita");
-
-        /*Play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                crono.start();
-                crono.setText(formato);
-
-                Titulo.setText("Bienvenido Usuario "+ u.getUsuarioU());
-
-                 b = getIntent().getExtras();
-                Pause.setEnabled(true);
-                Play.setEnabled(false);
-            }
-        });*/
-
+        Titulo.setText("Oye "+ u.getUsuarioU() +" Quieres una Pista?\n Toca en la lamparita");
         Pause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 crono.stop();
-                formato = crono.getText().toString();
+                crono.setFormat(formato);
+                Reloj=true;
                 AlertaPausa();
             }
         });
+
+        crono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+                if(!Reloj)
+               {
+                   long sec = ((SystemClock.elapsedRealtime()-crono.getBase())/1000%60);
+                   if(sec<10)
+                   {
+                       formato = "00:0"+sec;
+                   }
+                   else
+                   {formato = "00:"+sec;}
+                   crono.setText(formato);
+                   elapsedTime = SystemClock.elapsedRealtime();
+               }
+               else
+               {
+                   long sec = ((SystemClock.elapsedRealtime()-crono.getBase())/1000%60);
+                   if(sec<10)
+                   {
+                       formato = "00:0"+sec;
+                   }
+                   else
+                   {formato = "00:"+sec;}
+                   crono.setText(formato);
+                   elapsedTime += 1000;
+               }
+            }
+        });
+    }
+
+    public void ReiniciarReloj()
+    {
+        crono.stop();
+        crono.setText("00:00");
+        Reloj=false;
+        //region Play
+            elapsedTime = 0;
+            crono.setBase(SystemClock.elapsedRealtime());
+            crono.start();
+        //endregion
     }
 
     public boolean FinalizarPartida() {
@@ -131,6 +156,7 @@ public class partidaActivity extends AppCompatActivity {
         CambiarImagen();
         ReiniciarBotones();
         Puntaje.setText(Integer.toString(Puntos));
+        ReiniciarReloj();
     }
 
     public void ActualizarPalabra() {
@@ -409,9 +435,23 @@ public class partidaActivity extends AppCompatActivity {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                crono.start();
-                crono.setText(formato);
+
+                //region Reloj
+                if(!Reloj)
+                {
+                    crono.setBase(SystemClock.elapsedRealtime());
+                    crono.start();
+                }
+                else
+                {
+                    long e = elapsedTime;
+                    long a = SystemClock.elapsedRealtime();
+                    crono.setBase(a-e);
+                    crono.start();
+                }
+                //endregion
                 dialogInterface.cancel();
+
             }
         });
         AlertD.create().show();
