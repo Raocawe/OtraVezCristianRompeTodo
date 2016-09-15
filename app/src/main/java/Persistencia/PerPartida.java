@@ -33,7 +33,7 @@ public class PerPartida extends SqlLite{
         if(this.c.isAfterLast() == false)
         {
             partida = new Partida();
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             partida.setFechaPartidaN(formato.parse(c.getString(2)));
             partida.setIdUP(c.getInt(0));
             partida.setIdPartida(c.getInt(3));
@@ -56,7 +56,7 @@ public class PerPartida extends SqlLite{
         while(c.isAfterLast() == false)
         {
             Partida = new Partida();
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             Partida.setFechaPartidaN(formato.parse(c.getString(2)));
             Partida.setIdUP(c.getInt(0));
             Partida.setIdPartida(c.getInt(3));
@@ -70,7 +70,7 @@ public class PerPartida extends SqlLite{
     public ArrayList<Partida> TopCincoMejores() throws ParseException {
         ArrayList<Partida>  partidas = new ArrayList<Partida>();
         Partida partida;
-        SimpleDateFormat formato = new SimpleDateFormat();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         this.seleccionar("SELECT * FROM Partida order by PuntajePartida desc LIMIT 5");
         if(this.c.isAfterLast() == false)
         {
@@ -92,11 +92,8 @@ public class PerPartida extends SqlLite{
         if(this.c.isAfterLast() == false)
         {
             partida = new Partida();
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
-            String aux = c.getString(2);
-            partida.setFechaPartidaN(formato.parse(aux));
-
-
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            partida.setFechaPartidaN(formato.parse(c.getString(2)));
             partida.setIdUP(c.getInt(0));
             partida.setIdPartida(c.getInt(3));
             partida.setPuntajePartida(c.getInt(1));
